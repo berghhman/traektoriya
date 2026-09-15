@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ru" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Траектория. Строительство и отделка</title>
+<meta name="description" content="Траектория: загородное строительство и внутренняя отделка в Санкт-Петербурге и Ленинградской области. Полный цикл работ от проекта до завершения, с гарантией качества на каждом этапе. С 2013 года.">
+<meta name="theme-color" content="#0e1216">
+<link rel="icon" href="assets/img/brand/logo-dark.svg">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Траектория. Строительство и отделка">
+<meta property="og:description" content="Траектория: загородное строительство и внутренняя отделка в Санкт-Петербурге и Ленинградской области. Полный цикл работ от проекта до завершения, с гарантией качества на каждом этапе. С 2013 года.">
+<meta property="og:image" content="https://traektoriya.pro/assets/img/home/shot-01.jpg">
+<meta property="og:locale" content="ru_RU">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<script>document.documentElement.classList.replace('no-js','js');</script>
+
+<a class="skip" href="#main">Перейти к содержанию</a>
+<div class="rules" aria-hidden="true"><i></i></div>
+<div class="grain" aria-hidden="true"></div>
+<div class="cur" id="cur" aria-hidden="true"><span class="cur__t">ТЯНИ</span></div>
+<div class="cur-dot" id="curDot" aria-hidden="true"></div>
+
+<div class="load" id="load" role="status" aria-live="polite" aria-label="Загрузка">
+  <div class="load__half load__half--t"></div>
+  <div class="load__half load__half--b"></div>
+  <div class="load__in">
+    <div class="load__mark">ТРАЕКТОРИЯ</div>
+    <div class="load__line"><i id="loadLine"></i></div>
+    <div class="load__meta">
+      <span class="label">Санкт-Петербург · Ленинградская область</span>
+      <span class="load__pct"><span id="loadPct">00</span><sup>%</sup></span>
+    </div>
+  </div>
+</div>
+
+<div class="gauge" id="gauge" aria-hidden="true"><b id="gaugeFill"></b></div>
+
+<header class="hdr" id="hdr">
+  <div class="hdr__in">
+    <a class="hdr__logo" href="index.html" aria-label="Траектория, на главную">
+      <img src="assets/img/brand/logo-dark.svg" alt="Траектория" width="160" height="38">
+    </a>
+    <nav class="hdr__nav" aria-label="Основное">
+      <a class="hdr__tel mono" href="tel:+79119230903">+7 911 923-09-03</a>
+      <a class="cta magnet" href="zayavka.html">Обсудить проект</a>
+      <button class="burger" id="burger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="sheet">
+        <i></i><i></i>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<div class="sheet" id="sheet" aria-hidden="true">
+  <nav class="sheet__nav" aria-label="Разделы сайта">
+    <div class="sheet__row"><a class="sheet__link" aria-current="page" href="index.html"><span>00</span>Главная</a></div>
+    <div class="sheet__row"><a class="sheet__link" href="villageprojects.html"><span>З-01</span>Проекты домов</a></div>
+    <div class="sheet__row"><a class="sheet__link" href="villagerealization.html"><span>З-02</span>Как это выглядит</a></div>
+    <div class="sheet__row"><a class="sheet__link" href="projects.html"><span>Ж-01</span>ЖК: входные группы</a></div>
+    <div class="sheet__row"><a class="sheet__link" href="otdelkajk.html"><span>Ж-02</span>ЖК: отделка квартир</a></div>
+    <div class="sheet__row"><a class="sheet__link" href="partners.html"><span>П</span>Партнёры</a></div>
+    <div class="sheet__row"><a class="sheet__link" href="about.html"><span>О</span>О компании</a></div>
+    <div class="sheet__row"><a class="sheet__link" href="contacts.html"><span>К</span>Контакты</a></div>
+  </nav>
+  <div class="sheet__foot">
+    <a class="mono" href="tel:+79119230903">+7 911 923-09-03</a>
+    <a href="mailto:info@traektoriya.pro">info@traektoriya.pro</a>
+    <span>Санкт-Петербург, Комендантский проспект, 43&nbsp;к3</span>
+  </div>
+</div>
+
+<main id="main">
+
+  <section class="phead phead--img" style="min-height:clamp(600px,90svh,940px);display:flex;align-items:flex-end;padding-bottom:clamp(36px,4.6vw,72px)">
+    <div class="phead__bg" data-parallax aria-hidden="true" style="inset:-8% 0">
+      <img src="assets/img/home/shot-01.jpg" alt="" data-hero-img fetchpriority="high" decoding="async" style="opacity:1">
+    </div>
+    <span class="marks" aria-hidden="true"></span>
+    <span class="edge" aria-hidden="true">Строительство и отделка</span>
+    <div class="phead__in wrap grid">
+      <span class="label">Санкт-Петербург</span>
+      <div>
+        <h1 style="font-size:var(--d1);line-height:.94">
+          <span class="l" style="--dl:0ms"><span style="color:var(--brand-lift)">Траектория</span></span>
+          <span class="l" style="--dl:110ms"><span style="padding-left:.13em">в строительстве</span></span>
+          <span class="l" style="--dl:220ms"><span style="padding-left:.13em">города</span></span>
+        </h1>
+        <div style="margin-top:clamp(30px,4vw,60px);display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px clamp(24px,4vw,64px)">
+          <p class="phead__lead rv" style="--dl:120ms;margin:0;max-width:44ch">Загородное строительство и внутренняя отделка.
+            Полный цикл работ от проекта до завершения, с гарантией качества на каждом этапе.</p>
+          <div class="rv" style="--dl:220ms;display:flex;gap:clamp(16px,2vw,34px);align-items:flex-end">
+            <div style="display:grid;gap:6px"><span class="label">Широта</span><b class="mono" style="font-family:var(--display);font-size:clamp(15px,1.15vw,19px)">60.027629</b></div>
+            <div style="display:grid;gap:6px"><span class="label">Долгота</span><b class="mono" style="font-family:var(--display);font-size:clamp(15px,1.15vw,19px)">30.239709</b></div>
+          </div>
+        </div>
+        <div class="cue rv" style="--dl:320ms"><i></i><span class="label">Листайте</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker__row">
+      <div class="ticker__set"><span>Загородное строительство</span><span>Внутренняя отделка</span><span>Входные группы</span><span>Отделка квартир</span><span>Полный цикл работ</span></div>
+      <div class="ticker__set"><span>Загородное строительство</span><span>Внутренняя отделка</span><span>Входные группы</span><span>Отделка квартир</span><span>Полный цикл работ</span></div>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="wrap grid">
+      <span class="label">Подход</span>
+      <p class="rv" style="margin:0;font-family:var(--display);font-weight:700;font-size:var(--d2);line-height:1.04;letter-spacing:-.028em">У&nbsp;нас <span style="position:relative;display:inline-block;vertical-align:top"><span id="ghost" style="visibility:hidden;display:block"></span><span id="typed" style="position:absolute;inset:0;display:block;color:var(--brand-lift)"></span></span></p>
+    </div>
+  </section>
+
+  <section class="section section--paper">
+    <div class="wrap grid">
+      <span class="label">О компании</span>
+      <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.86fr);gap:clamp(34px,5vw,90px);align-items:start">
+        <div>
+          <h2 style="margin:0 0 22px;font-family:var(--display);font-weight:700;font-size:var(--d3);line-height:1;letter-spacing:-.02em;color:var(--brand)"><span class="l"><span>Траектория</span></span></h2>
+          <div class="article rv" style="--dl:90ms">
+            <p>Ваш надежный партнер в загородном строительстве и внутренней отделке уже 13 лет.
+            Мы создаем дома с нуля и превращаем квартиры в новостройках в уютные и стильные пространства.
+            <strong>Полный цикл работ от проекта до завершения</strong>, с гарантией качества на каждом этапе.</p>
+          </div>
+        </div>
+        <div class="fig rv" style="justify-self:end">
+          <span class="fig__n" data-count="13">13</span>
+          <span class="fig__u">лет</span>
+          <div class="fig__rule"></div>
+          <span class="label">В строительстве и отделке · с 2013</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="works">
+    <div class="wrap grid">
+      <span class="label">Объекты</span>
+      <div>
+        <div class="works__head">
+          <div>
+            <span class="label label--brand">Портфолио</span>
+            <h2 style="margin:12px 0 0;font-family:var(--display);font-weight:700;font-size:var(--d3);line-height:1.04;letter-spacing:-.02em">
+              <span class="l" style="--dl:0ms"><span>Дома, квартиры,</span></span>
+              <span class="l" style="--dl:100ms"><span>входные группы</span></span>
+            </h2>
+          </div>
+          <div class="works__ctrl">
+            <span class="works__idx" id="wIdx" aria-live="polite"><b>01</b><span> / 21</span></span>
+            <button class="arw" id="wPrev" type="button" aria-label="Предыдущий объект"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4 7 12l8 8"/></svg></button>
+            <button class="arw" id="wNext" type="button" aria-label="Следующий объект"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4l8 8-8 8"/></svg></button>
+          </div>
+        </div>
+        <div class="rail" id="rail" tabindex="0" role="region" aria-label="Лента объектов"></div>
+        <div class="works__bar"><i id="wBar"></i></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="border-top:1px solid var(--rule-soft)">
+    <div class="wrap grid">
+      <span class="label">Принцип</span>
+      <h2 style="margin:0;font-family:var(--display);font-weight:700;font-size:var(--d2);line-height:1.04;letter-spacing:-.028em">
+        <span class="l" style="--dl:0ms"><span>Ваша идея.</span></span>
+        <span class="l" style="--dl:120ms"><span><em style="font-style:normal;color:var(--brand-lift)">Наша задача.</em></span></span>
+      </h2>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <div class="contact__grid">
+        <div class="contact__panel">
+          <span class="label label--brand">Контакты</span>
+          <h2 class="contact__title">
+            <span class="l" style="--dl:0ms"><span>Свяжитесь с нами удобным</span></span>
+            <span class="l" style="--dl:100ms"><span>для Вас способом</span></span>
+          </h2>
+          <div class="rows rv">
+            <div class="row"><span class="label">Адрес</span><span class="row__v">Санкт-Петербург, Комендантский проспект, 43&nbsp;к3</span></div>
+            <div class="row"><span class="label">Телефон</span><span class="row__v mono"><a href="tel:+79119230903">+7 911 923-09-03</a></span></div>
+            <div class="row"><span class="label">Почта</span><span class="row__v"><a href="mailto:info@traektoriya.pro">info@traektoriya.pro</a></span></div>
+            <div class="row"><span class="label">Координаты</span><span class="row__v mono">60.027629 · 30.239709</span></div>
+          </div>
+          <div class="contact__cta rv" style="--dl:90ms">
+            <a class="cta cta--solid magnet" href="tel:+79119230903">Позвонить</a>
+            <a class="cta magnet" href="mailto:info@traektoriya.pro">Написать письмо</a>
+          </div>
+        </div>
+        <div class="contact__map">
+          <iframe loading="lazy" title="Карта: Санкт-Петербург, Комендантский проспект, 43 к3"
+            src="https://yandex.ru/map-widget/v1/?ll=30.239709%2C60.027629&amp;z=16&amp;pt=30.239709,60.027629,pm2blm"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <a class="next" href="projects.html">
+    <div class="wrap next__in">
+      <div>
+        <span class="label label--brand">Дальше</span>
+        <div class="next__t" style="margin-top:10px">Наши объекты</div>
+      </div>
+      <span class="next__a" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </span>
+    </div>
+  </a>
+</main>
+
+<footer class="ftr">
+  <div class="wrap">
+    <div class="ftr__top">
+      <a class="ftr__logo" href="index.html" aria-label="Траектория, на главную">
+        <img src="assets/img/brand/logo-light.svg" alt="Траектория" width="180" height="54" loading="lazy">
+      </a>
+      <div class="ftr__cols">
+        <div class="ftr__col">
+          <span class="label">Загородное</span>
+          <a href="villageprojects.html">Проекты домов</a>
+          <a href="villagerealization.html">Как это выглядит</a>
+        </div>
+        <div class="ftr__col">
+          <span class="label">Жилые комплексы</span>
+          <a href="projects.html">Входные группы</a>
+          <a href="otdelkajk.html">Отделка квартир</a>
+        </div>
+        <div class="ftr__col">
+          <span class="label">Компания</span>
+          <a href="about.html">О нас</a>
+          <a href="partners.html">Партнёры</a>
+          <a href="contacts.html">Контакты</a>
+          <a href="zayavka.html">Оставить заявку</a>
+        </div>
+      </div>
+    </div>
+    <div class="ftr__mark" aria-hidden="true">ТРАЕКТОРИЯ</div>
+    <div class="ftr__bot">
+      <span>© <span id="yr">2026</span> Траектория · с 2013 года</span>
+      <span>Санкт-Петербург · Ленинградская область</span>
+      <a class="mono" href="tel:+79119230903">+7 911 923-09-03</a>
+    </div>
+  </div>
+</footer>
+
+<div class="dock" id="dock">
+  <div class="dock__in">
+    <a class="cta cta--solid" href="tel:+79119230903">Позвонить</a>
+    <a class="cta" href="zayavka.html">Заявка</a>
+  </div>
+</div>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Просмотр объекта">
+  <div class="lb__bar">
+    <span class="lb__title" id="lbTitle"></span>
+    <button class="lb__x" id="lbX" type="button" aria-label="Закрыть">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg>
+    </button>
+  </div>
+  <div class="lb__fig"><img id="lbImg" alt=""></div>
+  <div class="lb__nav">
+    <button class="arw" id="lbPrev" type="button" aria-label="Предыдущее фото">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4 7 12l8 8"/></svg>
+    </button>
+    <span class="lb__idx" id="lbIdx">01 / 01</span>
+    <button class="arw" id="lbNext" type="button" aria-label="Следующее фото">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4l8 8-8 8"/></svg>
+    </button>
+  </div>
+</div>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"GeneralContractor","name":"Траектория",
+"url":"https://traektoriya.pro/","telephone":"+7 911 923-09-03","email":"info@traektoriya.pro","foundingDate":"2013",
+"address":{"@type":"PostalAddress","streetAddress":"Комендантский проспект, 43 к3","addressLocality":"Санкт-Петербург","addressCountry":"RU"},
+"geo":{"@type":"GeoCoordinates","latitude":60.027629,"longitude":30.239709},
+"areaServed":["Санкт-Петербург","Ленинградская область"]}
+</script>
+
+<script>
+window.SHOTS=["assets/img/home/shot-01.jpg", "assets/img/home/shot-02.jpg", "assets/img/home/shot-03.jpg", "assets/img/home/shot-04.jpg", "assets/img/home/shot-05.jpg", "assets/img/home/shot-06.jpg", "assets/img/home/shot-07.jpg", "assets/img/home/shot-08.jpg", "assets/img/home/shot-09.jpg", "assets/img/home/shot-10.jpg", "assets/img/home/shot-11.jpg", "assets/img/home/shot-12.jpg", "assets/img/home/shot-13.jpg", "assets/img/home/shot-14.jpg", "assets/img/home/shot-15.jpg", "assets/img/home/shot-16.jpg", "assets/img/home/shot-17.jpg", "assets/img/home/shot-18.jpg", "assets/img/home/shot-19.jpg", "assets/img/home/shot-20.jpg", "assets/img/home/shot-21.jpg"];
+window.PHRASES=["полный цикл работ", "свой проект и своя бригада", "дома под ключ", "отделка квартир в новостройках", "гарантия на каждом этапе"];
+</script>
+<script src="assets/site.js"></script>
+</body>
+</html>

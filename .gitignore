@@ -1,0 +1,24 @@
+# macOS
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# Редакторы
+.vscode/
+.idea/
+*.swp
+
+# Вспомогательные файлы для первичной загрузки фотографий.
+# Изображения уже лежат в assets/img и хранятся в репозитории,
+# поэтому скрипты скачивания в историю не попадают.
+download-assets.sh
+download-assets.py
+images.tsv
+
+# Старая версия описания, заменена на README.md
+README.txt
