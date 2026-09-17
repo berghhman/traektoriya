@@ -9,6 +9,27 @@
 
   var yr = $('yr'); if (yr) yr.textContent = new Date().getFullYear();
 
+  /* Тема оформления */
+  var THEME_KEY = 'tr-theme';
+  var themeBtn = $('theme');
+  var themeMeta = document.querySelector('meta[name="theme-color"]');
+  var setTheme = function (name) {
+    doc.setAttribute('data-theme', name);
+    if (themeMeta) themeMeta.setAttribute('content', name === 'dark' ? '#0e1216' : '#ffffff');
+    if (themeBtn) {
+      themeBtn.setAttribute('aria-pressed', name === 'dark' ? 'true' : 'false');
+      themeBtn.setAttribute('aria-label', name === 'dark' ? 'Включить светлую тему' : 'Включить тёмную тему');
+    }
+  };
+  setTheme(doc.getAttribute('data-theme') === 'dark' ? 'dark' : 'light');
+  if (themeBtn) {
+    themeBtn.addEventListener('click', function () {
+      var next = doc.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      setTheme(next);
+      try { localStorage.setItem(THEME_KEY, next); } catch (e) {}
+    });
+  }
+
   /* Экран загрузки */
   var load = $('load');
   if (load) {
@@ -365,6 +386,16 @@
     }
   }
 
+  /* Логотипы партнёров.
+     Положите файл в assets/img/partners/<slug>.svg или .png —
+     он появится в карточке сам. Пока файла нет, место остаётся пустым. */
+  [].forEach.call(document.querySelectorAll('[data-logo]'), function (el) {
+    var src = el.getAttribute('data-logo');
+    var probe = new Image();
+    probe.onload = function () { el.src = src; el.classList.add('on'); };
+    probe.src = src;
+  });
+
   /* Форма заявки.
      FORM_ENDPOINT: адрес обработчика. Пока пуст, заявка уходит письмом
      через почтовую программу. Впишите сюда адрес своего обработчика
@@ -372,46 +403,52 @@
   var FORM_ENDPOINT = '';
   var MAIL_TO = 'info@traektoriya.pro';
 
-  var zf = $('zform');
-  if (zf) {
-    var proj = $('f-proj');
-    var q = new URLSearchParams(location.search).get('p');
-    if (q && proj) proj.value = q;
+  var urlProj = new URLSearchParams(location.search).get('p');
 
-    $('f-policy').addEventListener('click', function (e) {
+  var bindForm = function (form) {
+    var wrap = form.parentNode;
+    var note = form.querySelector('[data-note]');
+    var doneEl = wrap.querySelector('[data-done]');
+    var policy = form.querySelector('[data-policy]');
+    var field = function (n) { return form.querySelector('[name="' + n + '"]'); };
+
+    var proj = field('proj');
+    if (urlProj && proj) proj.value = urlProj;
+
+    if (policy) {
+      policy.addEventListener('click', function (e) {
+        e.preventDefault();
+        alert('Разместите здесь ссылку на политику обработки персональных данных.');
+      });
+    }
+
+    var warn = function (msg, el) {
+      if (note) { note.textContent = msg; note.classList.add('form__note--warn'); }
+      if (el) el.focus();
+    };
+
+    form.addEventListener('submit', function (e) {
       e.preventDefault();
-      alert('Разместите здесь ссылку на политику обработки персональных данных.');
-    });
+      var tel = field('tel'), ok = field('ok');
 
-    zf.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var tel = $('f-tel'), ok = $('f-ok'), note = $('f-note');
+      if (!tel.value.trim()) return warn('Укажите телефон: без него мы не сможем перезвонить.', tel);
+      if (ok && !ok.checked) return warn('Нужно согласие на обработку данных.', ok);
 
-      if (!tel.value.trim()) {
-        note.textContent = 'Укажите телефон: без него мы не сможем перезвонить.';
-        note.style.color = 'var(--brand-lift)';
-        tel.focus();
-        return;
-      }
-      if (!ok.checked) {
-        note.textContent = 'Нужно согласие на обработку данных.';
-        note.style.color = 'var(--brand-lift)';
-        ok.focus();
-        return;
-      }
-
+      var val = function (n) { var f = field(n); return f ? f.value.trim() : ''; };
       var d = {
-        name: $('f-name').value.trim(),
-        tel: tel.value.trim(),
-        mail: $('f-mail').value.trim(),
-        kind: $('f-kind').value,
-        proj: proj.value.trim(),
-        msg: $('f-msg').value.trim()
+        name: val('name'), tel: tel.value.trim(), mail: val('mail'),
+        kind: val('kind'), proj: val('proj'), msg: val('msg')
       };
+
       var done = function () {
-        zf.classList.add('hide');
-        $('zdone').classList.add('on');
-        $('zdone').scrollIntoView({ block: 'center', behavior: reduce ? 'auto' : 'smooth' });
+        form.classList.add('hide');
+        var box = form.closest('.modal__in');
+        if (box) box.classList.add('sent');
+        if (!doneEl) return;
+        doneEl.classList.add('on');
+        if (!form.closest('.modal')) {
+          doneEl.scrollIntoView({ block: 'center', behavior: reduce ? 'auto' : 'smooth' });
+        }
       };
 
       if (FORM_ENDPOINT) {
@@ -420,8 +457,7 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(d)
         }).then(done).catch(function () {
-          note.textContent = 'Не удалось отправить. Позвоните нам или напишите на почту.';
-          note.style.color = 'var(--brand-lift)';
+          warn('Не удалось отправить. Позвоните нам или напишите на почту.');
         });
         return;
       }
@@ -439,6 +475,95 @@
         '?subject=' + encodeURIComponent('Заявка с сайта: ' + d.kind) +
         '&body=' + encodeURIComponent(body);
       setTimeout(done, 600);
+    });
+  };
+
+  [].forEach.call(document.querySelectorAll('form[data-form]'), bindForm);
+
+  /* Всплывающее окно заявки */
+  var modal = $('modal');
+  if (modal) {
+    var mForm = modal.querySelector('form[data-form]');
+    var mDone = modal.querySelector('[data-done]');
+    var mTitle = $('modalTitle'), mLead = $('modalLead'), mKicker = $('modalKicker');
+    var lastFocus = null;
+
+    var setModal = function (open) {
+      modal.classList.toggle('on', open);
+      modal.setAttribute('aria-hidden', open ? 'false' : 'true');
+      lockScroll(open);
+      if (open) {
+        var first = modal.querySelector('input,select,textarea,button');
+        if (first) first.focus();
+      } else if (lastFocus) {
+        lastFocus.focus();
+        lastFocus = null;
+      }
+    };
+
+    var openModal = function (opts) {
+      opts = opts || {};
+      lastFocus = document.activeElement;
+      mForm.classList.remove('hide');
+      mDone.classList.remove('on');
+      var box = modal.querySelector('.modal__in');
+      if (box) box.classList.remove('sent');
+      if (mKicker) mKicker.textContent = opts.kicker || 'Заявка';
+      if (mTitle) mTitle.textContent = opts.title || 'Обсудим ваш проект';
+      if (mLead) mLead.textContent = opts.lead ||
+        'Оставьте телефон, перезвоним и уточним задачу. Это ни к чему не обязывает.';
+      var pf = mForm.querySelector('[name="proj"]');
+      if (pf) pf.value = opts.proj || '';
+      var kf = mForm.querySelector('[name="kind"]');
+      if (kf && opts.kind) {
+        [].forEach.call(kf.options, function (o) { if (o.value === opts.kind) kf.value = opts.kind; });
+      }
+      var nt = mForm.querySelector('[data-note]');
+      if (nt) nt.classList.remove('form__note--warn');
+      setModal(true);
+    };
+
+    [].forEach.call(modal.querySelectorAll('[data-modal-close]'), function (el) {
+      el.addEventListener('click', function () { setModal(false); });
+    });
+
+    addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && modal.classList.contains('on')) setModal(false);
+    });
+
+    /* Любая ссылка на страницу заявки, почта и кнопка «Позвонить»
+       на компьютере открывают окно вместо перехода. На телефоне
+       «Позвонить» остаётся звонком, почта — письмом. */
+    var onZayavka = /zayavka\.html/.test(location.pathname);
+
+    document.addEventListener('click', function (e) {
+      var t = e.target.closest ? e.target.closest('a[href],button[data-gal]') : null;
+      if (!t || !t.getAttribute) return;
+      var href = t.getAttribute('href') || '';
+
+      if (href.indexOf('zayavka.html') === 0 && !onZayavka) {
+        e.preventDefault();
+        var q = href.split('?p=')[1];
+        openModal({ proj: q ? decodeURIComponent(q.replace(/\+/g, ' ')) : '' });
+        return;
+      }
+      if (href.indexOf('mailto:') === 0) {
+        e.preventDefault();
+        openModal({
+          kicker: 'Письмо',
+          title: 'Напишите нам',
+          lead: 'Опишите задачу — ответим на почту или перезвоним, как удобнее.'
+        });
+        return;
+      }
+      if (href.indexOf('tel:') === 0 && fine && t.classList.contains('cta')) {
+        e.preventDefault();
+        openModal({
+          kicker: 'Обратный звонок',
+          title: 'Перезвоним вам',
+          lead: 'Оставьте номер и удобное время — наберём сами. Или позвоните сразу: ' + t.textContent.trim() + '.'
+        });
+      }
     });
   }
 })();

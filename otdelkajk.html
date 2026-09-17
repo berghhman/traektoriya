@@ -4,12 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Отделка квартир в ЖК | Траектория</title>
-<meta name="description" content="Внутренняя отделка квартир в новостройках Санкт-Петербурга: ЖК Univer City, ЖК «CHE». Полный цикл работ.">
-<meta name="theme-color" content="#0e1216">
+<meta name="description" content="Внутренняя отделка квартир в новостройках Санкт-Петербурга: ЖК Univer City, ЖК «Чистое небо». Полный цикл от чернового состояния до готового интерьера.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#ffffff">
+<script>(function(){var t;try{t=localStorage.getItem('tr-theme');}catch(e){}document.documentElement.setAttribute('data-theme',t==='dark'?'dark':'light');if(t==='dark'){var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content','#0e1216');}})();</script>
 <link rel="icon" href="assets/img/brand/logo-dark.svg">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Отделка квартир в ЖК | Траектория">
-<meta property="og:description" content="Внутренняя отделка квартир в новостройках Санкт-Петербурга: ЖК Univer City, ЖК «CHE». Полный цикл работ.">
+<meta property="og:description" content="Внутренняя отделка квартир в новостройках Санкт-Петербурга: ЖК Univer City, ЖК «Чистое небо». Полный цикл от чернового состояния до готового интерьера.">
 <meta property="og:image" content="https://traektoriya.pro/assets/img/otdelka/univer-city-01.jpg">
 <meta property="og:locale" content="ru_RU">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -43,12 +45,13 @@
 
 <header class="hdr" id="hdr">
   <div class="hdr__in">
-    <a class="hdr__logo" href="index.html" aria-label="Траектория, на главную">
-      <img src="assets/img/brand/logo-dark.svg" alt="Траектория" width="160" height="38">
-    </a>
+    <a class="mark hdr__mark" href="index.html" aria-label="Траектория, на главную">Траектория</a>
     <nav class="hdr__nav" aria-label="Основное">
       <a class="hdr__tel mono" href="tel:+79119230903">+7 911 923-09-03</a>
       <a class="cta magnet" href="zayavka.html">Обсудить проект</a>
+      <button class="tgl" id="theme" type="button" aria-label="Включить тёмную тему" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.4"/><path d="M12 3.6a8.4 8.4 0 0 0 0 16.8z"/></svg>
+      </button>
       <button class="burger" id="burger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="sheet">
         <i></i><i></i>
       </button>
@@ -86,41 +89,62 @@
           <span class="l" style="--dl:0ms"><span>Внутренняя отделка</span></span>
           <span class="l" style="--dl:100ms"><span>квартир</span></span>
         </h1>
-        <p class="phead__lead rv" style="--dl:120ms">Превращаем квартиры в новостройках в уютные и стильные пространства: от чернового состояния до готового интерьера.</p>
+        <p class="phead__lead rv" style="--dl:120ms">Превращаем квартиры в новостройках в готовые к жизни пространства: от чернового состояния до финишной отделки.</p>
       </div>
     </div>
   </section>
   <section class="section">
-    <div class="wrap grid">
-      <span class="label">Объекты</span>
-      <div>
-      <div class="cards">
-        <button class="card rv" data-gal="otd_univer" type="button" style="--dl:0ms">
-          <span class="card__img"><img src="assets/img/otdelka/univer-city-01.jpg" alt="ЖК Univer City" loading="lazy" decoding="async"></span>
-          <span class="card__veil"></span>
-          <span class="card__no">01</span>
-          <span class="card__go" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg>
-          </span>
-          <span class="card__body">
-            <span class="card__name">ЖК Univer City</span>
-            <span class="card__meta">14 фото</span>
-          </span>
+    <div class="wrap">
+      <article class="proj">
+        <button class="proj__media rv" type="button" data-gal="otd_univer" aria-label="Смотреть галерею: ЖК Univer City">
+          <img src="assets/img/otdelka/univer-city-01.jpg" alt="ЖК Univer City" loading="lazy" decoding="async">
+          <span class="proj__no">01</span>
+          <span class="proj__count">14 фото</span>
         </button>
-        <button class="card rv" data-gal="otd_che" type="button" style="--dl:70ms">
-          <span class="card__img"><img src="assets/img/otdelka/che-01.jpeg" alt="ЖК «CHE»" loading="lazy" decoding="async"></span>
-          <span class="card__veil"></span>
-          <span class="card__no">02</span>
-          <span class="card__go" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg>
-          </span>
-          <span class="card__body">
-            <span class="card__name">ЖК «CHE»</span>
-            <span class="card__meta">12 фото</span>
-          </span>
+        <div class="rv" style="--dl:90ms">
+          <span class="label label--brand">Объект</span>
+          <h2 class="proj__name">ЖК Univer City</h2>
+          <p class="proj__sub">Setl Group · Пушкинский район</p>
+          <p class="proj__txt">Квартиры в малоэтажных корпусах на Колпинском шоссе. Работаем от чернового состояния: разводка электрики и воды, выравнивание стен и стяжка пола, санузлы под ключ, финишная отделка и установка дверей. Планировки в проекте компактные, поэтому основная задача — собрать хранение и инженерию так, чтобы они не съедали метры.</p>
+          <dl class="spec">
+          <div><dt>Комплекс</dt><dd>Univer City</dd></div>
+          <div><dt>Застройщик</dt><dd>Setl Group</dd></div>
+          <div><dt>Район</dt><dd>Пушкинский, Шушары</dd></div>
+          <div><dt>Тип работ</dt><dd>Отделка под ключ</dd></div>
+          <div><dt>Состав</dt><dd>Электрика, сантехника, стяжка, штукатурка, финиш</dd></div>
+          <div><dt>Материалы</dt><dd>КРЕПС, поставка через Петровича</dd></div>
+          </dl>
+          <div class="proj__cta">
+            <button class="cta cta--solid magnet" type="button" data-gal="otd_univer">Смотреть галерею</button>
+            <a class="cta magnet" href="zayavka.html?p=%D0%96%D0%9A%20Univer%20City">Обсудить отделку</a>
+          </div>
+        </div>
+      </article>
+      <article class="proj">
+        <button class="proj__media rv" type="button" data-gal="otd_che" aria-label="Смотреть галерею: ЖК «Чистое небо»">
+          <img src="assets/img/otdelka/che-01.jpeg" alt="ЖК «Чистое небо»" loading="lazy" decoding="async">
+          <span class="proj__no">02</span>
+          <span class="proj__count">12 фото</span>
         </button>
-      </div>
-      </div>
+        <div class="rv" style="--dl:90ms">
+          <span class="label label--brand">Объект</span>
+          <h2 class="proj__name">ЖК «Чистое небо»</h2>
+          <p class="proj__sub">Setl Group · Приморский район</p>
+          <p class="proj__txt">Квартиры в квартале на Комендантском проспекте. Здесь чаще берут полный цикл: перепланировка в рамках допустимого, выравнивание поверхностей, санузлы, чистовая отделка и подготовка под мебель. Дома кирпично-монолитные, что даёт свободу в расстановке перегородок и разводке инженерии.</p>
+          <dl class="spec">
+          <div><dt>Комплекс</dt><dd>Чистое небо</dd></div>
+          <div><dt>Застройщик</dt><dd>Setl Group</dd></div>
+          <div><dt>Район</dt><dd>Приморский, м. Комендантский проспект</dd></div>
+          <div><dt>Тип работ</dt><dd>Отделка под ключ</dd></div>
+          <div><dt>Состав</dt><dd>Электрика, сантехника, стяжка, штукатурка, финиш</dd></div>
+          <div><dt>Материалы</dt><dd>КРЕПС, поставка через Петровича</dd></div>
+          </dl>
+          <div class="proj__cta">
+            <button class="cta cta--solid magnet" type="button" data-gal="otd_che">Смотреть галерею</button>
+            <a class="cta magnet" href="zayavka.html?p=%D0%96%D0%9A%20%C2%AB%D0%A7%D0%B8%D1%81%D1%82%D0%BE%D0%B5%20%D0%BD%D0%B5%D0%B1%D0%BE%C2%BB">Обсудить отделку</a>
+          </div>
+        </div>
+      </article>
     </div>
   </section>
 
@@ -168,9 +192,7 @@
 <footer class="ftr">
   <div class="wrap">
     <div class="ftr__top">
-      <a class="ftr__logo" href="index.html" aria-label="Траектория, на главную">
-        <img src="assets/img/brand/logo-light.svg" alt="Траектория" width="180" height="54" loading="lazy">
-      </a>
+      <a class="mark ftr__mark-a" href="index.html" aria-label="Траектория, на главную">Траектория</a>
       <div class="ftr__cols">
         <div class="ftr__col">
           <span class="label">Загородное</span>
@@ -207,6 +229,64 @@
   </div>
 </div>
 
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
+  <div class="modal__veil" data-modal-close></div>
+  <div class="modal__box" role="document">
+    <button class="modal__x" type="button" data-modal-close aria-label="Закрыть">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg>
+    </button>
+    <div class="modal__in">
+      <span class="label label--brand" id="modalKicker">Заявка</span>
+      <h2 class="modal__t" id="modalTitle">Обсудим ваш проект</h2>
+      <p class="modal__lead" id="modalLead">Оставьте телефон, перезвоним и уточним задачу. Это ни к чему не обязывает.</p>
+
+      <form class="form form--tight" data-form novalidate>
+        <div class="two">
+          <div class="field">
+            <label>Как к вам обращаться</label>
+            <input name="name" type="text" autocomplete="name" placeholder="Имя">
+          </div>
+          <div class="field">
+            <label>Телефон</label>
+            <input name="tel" type="tel" autocomplete="tel" required placeholder="+7">
+          </div>
+        </div>
+        <div class="field">
+          <label>Направление</label>
+          <select name="kind">
+            <option>Строительство загородного дома</option>
+            <option>Отделка квартиры в новостройке</option>
+            <option>Входные группы в жилом комплексе</option>
+            <option>Внутренняя отделка дома</option>
+            <option>Пока не определился</option>
+          </select>
+        </div>
+        <input name="proj" type="hidden" value="">
+        <div class="field">
+          <label>Коротко о задаче</label>
+          <textarea name="msg" rows="3" placeholder="Участок, площадь, сроки, бюджет: всё, что уже понятно"></textarea>
+        </div>
+        <label class="agree">
+          <input name="ok" type="checkbox" required>
+          <span>Согласен на обработку персональных данных в соответствии с
+            <a href="#" data-policy>политикой обработки</a>.</span>
+        </label>
+        <button class="cta cta--solid form__send magnet" type="submit">Отправить заявку</button>
+        <p class="form__note" data-note>Перезваниваем в рабочее время. Если срочно, быстрее позвонить: <a class="mono" href="tel:+79119230903">+7 911 923-09-03</a>.</p>
+      </form>
+
+      <div class="thanks" data-done role="status">
+        <span class="tick" aria-hidden="true">
+          <svg viewBox="0 0 52 52"><circle class="tick__o" cx="26" cy="26" r="23"/><path class="tick__c" d="M15 27l8 8 15-16"/></svg>
+        </span>
+        <h3>Спасибо, заявка у нас</h3>
+        <p>Перезвоним на указанный номер. Если нужно быстрее — <a class="mono" href="tel:+79119230903">+7 911 923-09-03</a>.</p>
+        <button class="cta magnet" type="button" data-modal-close>Закрыть</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Просмотр объекта">
   <div class="lb__bar">
     <span class="lb__title" id="lbTitle"></span>
@@ -235,7 +315,7 @@
 </script>
 
 <script>
-window.GALLERIES={"otd_univer": {"title": "ЖК Univer City", "imgs": ["assets/img/otdelka/univer-city-01.jpg", "assets/img/otdelka/univer-city-02.jpg", "assets/img/otdelka/univer-city-03.jpg", "assets/img/otdelka/univer-city-04.jpg", "assets/img/otdelka/univer-city-05.jpg", "assets/img/otdelka/univer-city-06.jpg", "assets/img/otdelka/univer-city-07.jpg", "assets/img/otdelka/univer-city-08.jpg", "assets/img/otdelka/univer-city-09.jpg", "assets/img/otdelka/univer-city-10.jpg", "assets/img/otdelka/univer-city-11.jpg", "assets/img/otdelka/univer-city-12.jpg", "assets/img/otdelka/univer-city-13.jpg", "assets/img/otdelka/univer-city-14.jpg"]}, "otd_che": {"title": "ЖК «CHE»", "imgs": ["assets/img/otdelka/che-01.jpeg", "assets/img/otdelka/che-02.jpeg", "assets/img/otdelka/che-03.jpeg", "assets/img/otdelka/che-04.jpeg", "assets/img/otdelka/che-05.jpeg", "assets/img/otdelka/che-06.jpeg", "assets/img/otdelka/che-07.jpeg", "assets/img/otdelka/che-08.jpeg", "assets/img/otdelka/che-09.jpeg", "assets/img/otdelka/che-10.jpeg", "assets/img/otdelka/che-11.jpeg", "assets/img/otdelka/che-12.jpeg"]}};
+window.GALLERIES={"otd_univer": {"title": "ЖК Univer City", "imgs": ["assets/img/otdelka/univer-city-01.jpg", "assets/img/otdelka/univer-city-02.jpg", "assets/img/otdelka/univer-city-03.jpg", "assets/img/otdelka/univer-city-04.jpg", "assets/img/otdelka/univer-city-05.jpg", "assets/img/otdelka/univer-city-06.jpg", "assets/img/otdelka/univer-city-07.jpg", "assets/img/otdelka/univer-city-08.jpg", "assets/img/otdelka/univer-city-09.jpg", "assets/img/otdelka/univer-city-10.jpg", "assets/img/otdelka/univer-city-11.jpg", "assets/img/otdelka/univer-city-12.jpg", "assets/img/otdelka/univer-city-13.jpg", "assets/img/otdelka/univer-city-14.jpg"]}, "otd_che": {"title": "ЖК «Чистое небо»", "imgs": ["assets/img/otdelka/che-01.jpeg", "assets/img/otdelka/che-02.jpeg", "assets/img/otdelka/che-03.jpeg", "assets/img/otdelka/che-04.jpeg", "assets/img/otdelka/che-05.jpeg", "assets/img/otdelka/che-06.jpeg", "assets/img/otdelka/che-07.jpeg", "assets/img/otdelka/che-08.jpeg", "assets/img/otdelka/che-09.jpeg", "assets/img/otdelka/che-10.jpeg", "assets/img/otdelka/che-11.jpeg", "assets/img/otdelka/che-12.jpeg"]}};
 </script>
 <script src="assets/site.js"></script>
 </body>

@@ -3,13 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Входные группы | Траектория</title>
-<meta name="description" content="Входные группы в жилых комплексах Санкт-Петербурга: Чистое небо, Univer City, Светлана Парк, Панорама Парк Сосновка, Северная Корона.">
-<meta name="theme-color" content="#0e1216">
+<title>Входные группы в ЖК | Траектория</title>
+<meta name="description" content="Отделка входных групп в жилых комплексах Санкт-Петербурга: «Чистое небо», Univer City, Svetlana Park, «Панорама парк Сосновка», «Северная корона».">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#ffffff">
+<script>(function(){var t;try{t=localStorage.getItem('tr-theme');}catch(e){}document.documentElement.setAttribute('data-theme',t==='dark'?'dark':'light');if(t==='dark'){var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content','#0e1216');}})();</script>
 <link rel="icon" href="assets/img/brand/logo-dark.svg">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Входные группы | Траектория">
-<meta property="og:description" content="Входные группы в жилых комплексах Санкт-Петербурга: Чистое небо, Univer City, Светлана Парк, Панорама Парк Сосновка, Северная Корона.">
+<meta property="og:title" content="Входные группы в ЖК | Траектория">
+<meta property="og:description" content="Отделка входных групп в жилых комплексах Санкт-Петербурга: «Чистое небо», Univer City, Svetlana Park, «Панорама парк Сосновка», «Северная корона».">
 <meta property="og:image" content="https://traektoriya.pro/assets/img/jk/chistoe-nebo-01.jpg">
 <meta property="og:locale" content="ru_RU">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -43,12 +45,13 @@
 
 <header class="hdr" id="hdr">
   <div class="hdr__in">
-    <a class="hdr__logo" href="index.html" aria-label="Траектория, на главную">
-      <img src="assets/img/brand/logo-dark.svg" alt="Траектория" width="160" height="38">
-    </a>
+    <a class="mark hdr__mark" href="index.html" aria-label="Траектория, на главную">Траектория</a>
     <nav class="hdr__nav" aria-label="Основное">
       <a class="hdr__tel mono" href="tel:+79119230903">+7 911 923-09-03</a>
       <a class="cta magnet" href="zayavka.html">Обсудить проект</a>
+      <button class="tgl" id="theme" type="button" aria-label="Включить тёмную тему" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.4"/><path d="M12 3.6a8.4 8.4 0 0 0 0 16.8z"/></svg>
+      </button>
       <button class="burger" id="burger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="sheet">
         <i></i><i></i>
       </button>
@@ -86,89 +89,169 @@
           <span class="l" style="--dl:0ms"><span>Входные</span></span>
           <span class="l" style="--dl:100ms"><span>группы</span></span>
         </h1>
-        <p class="phead__lead rv" style="--dl:120ms">Отделка входных групп в жилых комплексах Санкт-Петербурга. Нажмите на объект, чтобы посмотреть галерею.</p>
+        <p class="phead__lead rv" style="--dl:120ms">Тамбуры, холлы, лестничные узлы и места общего пользования в новостройках Петербурга. Шесть комплексов, от комфорт-класса до премиума.</p>
       </div>
     </div>
   </section>
   <section class="section">
-    <div class="wrap grid">
-      <span class="label">Объекты</span>
-      <div>
-      <div class="cards">
-        <button class="card rv" data-gal="chistoenebo" type="button" style="--dl:0ms">
-          <span class="card__img"><img src="assets/img/jk/chistoe-nebo-01.jpg" alt="ЖК Чистое небо" loading="lazy" decoding="async"></span>
-          <span class="card__veil"></span>
-          <span class="card__no">01</span>
-          <span class="card__go" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg>
-          </span>
-          <span class="card__body">
-            <span class="card__name">ЖК Чистое небо</span>
-            <span class="card__meta">12 фото</span>
-          </span>
+    <div class="wrap">
+      <article class="proj">
+        <button class="proj__media rv" type="button" data-gal="chistoenebo" aria-label="Смотреть галерею: ЖК «Чистое небо»">
+          <img src="assets/img/jk/chistoe-nebo-01.jpg" alt="ЖК «Чистое небо»" loading="lazy" decoding="async">
+          <span class="proj__no">01</span>
+          <span class="proj__count">12 фото</span>
         </button>
-        <button class="card rv" data-gal="univercity" type="button" style="--dl:70ms">
-          <span class="card__img"><img src="assets/img/jk/univer-city-01.jpg" alt="ЖК Univer City" loading="lazy" decoding="async"></span>
-          <span class="card__veil"></span>
-          <span class="card__no">02</span>
-          <span class="card__go" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg>
-          </span>
-          <span class="card__body">
-            <span class="card__name">ЖК Univer City</span>
-            <span class="card__meta">16 фото</span>
-          </span>
+        <div class="rv" style="--dl:90ms">
+          <span class="label label--brand">Объект</span>
+          <h2 class="proj__name">ЖК «Чистое небо»</h2>
+          <p class="proj__sub">Setl Group · Приморский район</p>
+          <p class="proj__txt">Квартал на 98 гектарах у реки Каменка: тридцать четыре корпуса переменной этажности, от семи до двадцати пяти этажей, сданные с 2017 по 2023 год. Дома кирпично-монолитные, фасад комбинированный: оштукатуренный низ и вентилируемая облицовка выше. Дворы без машин, парковки убраны под землю. Мы отделывали входные группы: тамбуры, холлы и лестничные узлы.</p>
+          <dl class="spec">
+          <div><dt>Застройщик</dt><dd>Setl Group</dd></div>
+          <div><dt>Район</dt><dd>Приморский, м. Комендантский проспект</dd></div>
+          <div><dt>Корпуса</dt><dd>34, в четырнадцати очередях</dd></div>
+          <div><dt>Этажность</dt><dd>7–25</dd></div>
+          <div><dt>Сдан</dt><dd>2017–2023</dd></div>
+          <div><dt>Наши работы</dt><dd>Входные группы</dd></div>
+          </dl>
+          <div class="proj__cta">
+            <button class="cta cta--solid magnet" type="button" data-gal="chistoenebo">Смотреть галерею</button>
+            <a class="cta magnet" href="zayavka.html?p=%D0%96%D0%9A%20%C2%AB%D0%A7%D0%B8%D1%81%D1%82%D0%BE%D0%B5%20%D0%BD%D0%B5%D0%B1%D0%BE%C2%BB">Обсудить отделку</a>
+          </div>
+        </div>
+      </article>
+      <article class="proj">
+        <button class="proj__media rv" type="button" data-gal="univercity" aria-label="Смотреть галерею: ЖК Univer City">
+          <img src="assets/img/jk/univer-city-01.jpg" alt="ЖК Univer City" loading="lazy" decoding="async">
+          <span class="proj__no">02</span>
+          <span class="proj__count">16 фото</span>
         </button>
-        <button class="card rv" data-gal="svetlanapark2" type="button" style="--dl:140ms">
-          <span class="card__img"><img src="assets/img/jk/svetlana-park-2-01.jpg" alt="ЖК Светлана Парк 2" loading="lazy" decoding="async"></span>
-          <span class="card__veil"></span>
-          <span class="card__no">03</span>
-          <span class="card__go" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg>
-          </span>
-          <span class="card__body">
-            <span class="card__name">ЖК Светлана Парк 2</span>
-            <span class="card__meta">10 фото</span>
-          </span>
+        <div class="rv" style="--dl:90ms">
+          <span class="label label--brand">Объект</span>
+          <h2 class="proj__name">ЖК Univer City</h2>
+          <p class="proj__sub">Setl Group · Пушкинский район</p>
+          <p class="proj__txt">Малоэтажный квартал в Шушарах: двенадцать корпусов по четыре-пять этажей, кирпично-монолитных, с фасадами из керамогранита, кирпича и декоративной штукатурки в тёплой гамме. На территории школа с предуниверсарием, два детских сада и парк. Сдача корпусов идёт очередями до 2029 года. Здесь мы работаем и по входным группам, и по отделке квартир.</p>
+          <dl class="spec">
+          <div><dt>Застройщик</dt><dd>Setl Group</dd></div>
+          <div><dt>Район</dt><dd>Пушкинский, Шушары</dd></div>
+          <div><dt>Адрес</dt><dd>Колпинское шоссе, 129</dd></div>
+          <div><dt>Корпуса</dt><dd>12</dd></div>
+          <div><dt>Этажность</dt><dd>4–5</dd></div>
+          <div><dt>Сдача</dt><dd>очередями до 2029</dd></div>
+          <div><dt>Наши работы</dt><dd>Входные группы, отделка квартир</dd></div>
+          </dl>
+          <div class="proj__cta">
+            <button class="cta cta--solid magnet" type="button" data-gal="univercity">Смотреть галерею</button>
+            <a class="cta magnet" href="zayavka.html?p=%D0%96%D0%9A%20Univer%20City">Обсудить отделку</a>
+          </div>
+        </div>
+      </article>
+      <article class="proj">
+        <button class="proj__media rv" type="button" data-gal="svetlanapark2" aria-label="Смотреть галерею: Svetlana Park, вторая очередь">
+          <img src="assets/img/jk/svetlana-park-2-01.jpg" alt="Svetlana Park, вторая очередь" loading="lazy" decoding="async">
+          <span class="proj__no">03</span>
+          <span class="proj__count">10 фото</span>
         </button>
-        <button class="card rv" data-gal="panorama" type="button" style="--dl:210ms">
-          <span class="card__img"><img src="assets/img/jk/panorama-park-01.jpg" alt="ЖК Панорама Парк Сосновка" loading="lazy" decoding="async"></span>
-          <span class="card__veil"></span>
-          <span class="card__no">04</span>
-          <span class="card__go" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg>
-          </span>
-          <span class="card__body">
-            <span class="card__name">ЖК Панорама Парк Сосновка</span>
-            <span class="card__meta">10 фото</span>
-          </span>
+        <div class="rv" style="--dl:90ms">
+          <span class="label label--brand">Объект</span>
+          <h2 class="proj__name">Svetlana Park, вторая очередь</h2>
+          <p class="proj__sub">Setl Group · Выборгский район</p>
+          <p class="proj__txt">Вторая очередь квартала на месте объединения «Светлана»: корпуса 2.1 и 2.2, тысяча девяносто пять квартир, разрешение на ввод получено летом 2023 года. Класс бизнес, десять этажей, потолки три метра. Навесной фасад из облицовочного клинкерного кирпича. Уровень отделки мест общего пользования здесь выше обычного — работали по индивидуальным решениям.</p>
+          <dl class="spec">
+          <div><dt>Застройщик</dt><dd>Setl Group</dd></div>
+          <div><dt>Район</dt><dd>Выборгский, м. Удельная</dd></div>
+          <div><dt>Адрес</dt><dd>Манчестерская улица, 3</dd></div>
+          <div><dt>Корпуса</dt><dd>2.1 и 2.2</dd></div>
+          <div><dt>Этажность</dt><dd>10</dd></div>
+          <div><dt>Класс</dt><dd>Бизнес</dd></div>
+          <div><dt>Сдан</dt><dd>2023</dd></div>
+          <div><dt>Наши работы</dt><dd>Входные группы</dd></div>
+          </dl>
+          <div class="proj__cta">
+            <button class="cta cta--solid magnet" type="button" data-gal="svetlanapark2">Смотреть галерею</button>
+            <a class="cta magnet" href="zayavka.html?p=Svetlana%20Park%2C%20%D0%B2%D1%82%D0%BE%D1%80%D0%B0%D1%8F%20%D0%BE%D1%87%D0%B5%D1%80%D0%B5%D0%B4%D1%8C">Обсудить отделку</a>
+          </div>
+        </div>
+      </article>
+      <article class="proj">
+        <button class="proj__media rv" type="button" data-gal="panorama" aria-label="Смотреть галерею: ЖК «Панорама парк Сосновка»">
+          <img src="assets/img/jk/panorama-park-01.jpg" alt="ЖК «Панорама парк Сосновка»" loading="lazy" decoding="async">
+          <span class="proj__no">04</span>
+          <span class="proj__count">10 фото</span>
         </button>
-        <button class="card rv" data-gal="svetlanapark1" type="button" style="--dl:280ms">
-          <span class="card__img"><img src="assets/img/jk/svetlana-park-1-01.jpg" alt="ЖК Светлана Парк 1" loading="lazy" decoding="async"></span>
-          <span class="card__veil"></span>
-          <span class="card__no">05</span>
-          <span class="card__go" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg>
-          </span>
-          <span class="card__body">
-            <span class="card__name">ЖК Светлана Парк 1</span>
-            <span class="card__meta">10 фото</span>
-          </span>
+        <div class="rv" style="--dl:90ms">
+          <span class="label label--brand">Объект</span>
+          <h2 class="proj__name">ЖК «Панорама парк Сосновка»</h2>
+          <p class="proj__sub">Setl Group · Выборгский район</p>
+          <p class="proj__txt">Квартал между Удельным парком и Сосновкой: четыре очереди, девять-двенадцать этажей, сдача с 2022 по 2024 год. Кирпично-монолитные дома, фасады из керамогранита и кирпича с контрастными плитами. Через территорию проходит пешеходный бульвар почти в километр, связывающий два парка. Безбарьерная среда: пандусы и подъёмники во всех подъездах.</p>
+          <dl class="spec">
+          <div><dt>Застройщик</dt><dd>Setl Group</dd></div>
+          <div><dt>Район</dt><dd>Выборгский, м. Удельная</dd></div>
+          <div><dt>Адрес</dt><dd>Светлановский проспект, 8</dd></div>
+          <div><dt>Очереди</dt><dd>4</dd></div>
+          <div><dt>Этажность</dt><dd>9–12</dd></div>
+          <div><dt>Сдан</dt><dd>2022–2024</dd></div>
+          <div><dt>Наши работы</dt><dd>Входные группы</dd></div>
+          </dl>
+          <div class="proj__cta">
+            <button class="cta cta--solid magnet" type="button" data-gal="panorama">Смотреть галерею</button>
+            <a class="cta magnet" href="zayavka.html?p=%D0%96%D0%9A%20%C2%AB%D0%9F%D0%B0%D0%BD%D0%BE%D1%80%D0%B0%D0%BC%D0%B0%20%D0%BF%D0%B0%D1%80%D0%BA%20%D0%A1%D0%BE%D1%81%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0%C2%BB">Обсудить отделку</a>
+          </div>
+        </div>
+      </article>
+      <article class="proj">
+        <button class="proj__media rv" type="button" data-gal="svetlanapark1" aria-label="Смотреть галерею: Svetlana Park, первая очередь">
+          <img src="assets/img/jk/svetlana-park-1-01.jpg" alt="Svetlana Park, первая очередь" loading="lazy" decoding="async">
+          <span class="proj__no">05</span>
+          <span class="proj__count">10 фото</span>
         </button>
-        <button class="card rv" data-gal="severnayakorona" type="button" style="--dl:280ms">
-          <span class="card__img"><img src="assets/img/jk/severnaya-korona-01.jpg" alt="Северная Корона" loading="lazy" decoding="async"></span>
-          <span class="card__veil"></span>
-          <span class="card__no">06</span>
-          <span class="card__go" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg>
-          </span>
-          <span class="card__body">
-            <span class="card__name">Северная Корона</span>
-            <span class="card__meta">10 фото</span>
-          </span>
+        <div class="rv" style="--dl:90ms">
+          <span class="label label--brand">Объект</span>
+          <h2 class="proj__name">Svetlana Park, первая очередь</h2>
+          <p class="proj__sub">Setl Group · Выборгский район</p>
+          <p class="proj__txt">Первая очередь того же квартала: корпуса 1.1 и 1.2, тысяча девяносто квартир, введены в начале 2022 года. Во дворе дендропарк с искусственным рельефом и хвойными — ландшафт задаёт тон и входным группам, поэтому отделка холлов подбиралась под него: спокойная палитра, натуральные фактуры, много естественного света.</p>
+          <dl class="spec">
+          <div><dt>Застройщик</dt><dd>Setl Group</dd></div>
+          <div><dt>Район</dt><dd>Выборгский, м. Удельная</dd></div>
+          <div><dt>Адрес</dt><dd>Манчестерская улица, 3</dd></div>
+          <div><dt>Корпуса</dt><dd>1.1 и 1.2</dd></div>
+          <div><dt>Этажность</dt><dd>10</dd></div>
+          <div><dt>Класс</dt><dd>Бизнес</dd></div>
+          <div><dt>Сдан</dt><dd>2022</dd></div>
+          <div><dt>Наши работы</dt><dd>Входные группы</dd></div>
+          </dl>
+          <div class="proj__cta">
+            <button class="cta cta--solid magnet" type="button" data-gal="svetlanapark1">Смотреть галерею</button>
+            <a class="cta magnet" href="zayavka.html?p=Svetlana%20Park%2C%20%D0%BF%D0%B5%D1%80%D0%B2%D0%B0%D1%8F%20%D0%BE%D1%87%D0%B5%D1%80%D0%B5%D0%B4%D1%8C">Обсудить отделку</a>
+          </div>
+        </div>
+      </article>
+      <article class="proj">
+        <button class="proj__media rv" type="button" data-gal="severnayakorona" aria-label="Смотреть галерею: ЖК «Северная корона»">
+          <img src="assets/img/jk/severnaya-korona-01.jpg" alt="ЖК «Северная корона»" loading="lazy" decoding="async">
+          <span class="proj__no">06</span>
+          <span class="proj__count">10 фото</span>
         </button>
-      </div>
-      </div>
+        <div class="rv" style="--dl:90ms">
+          <span class="label label--brand">Объект</span>
+          <h2 class="proj__name">ЖК «Северная корона»</h2>
+          <p class="proj__sub">ПСК · Петроградский район</p>
+          <p class="proj__txt">Премиальный комплекс на набережной Карповки, построенный на месте гостиницы, простоявшей недостроенной три десятилетия. Малоэтажные корпуса в три-восемь этажей, триста шестьдесят одна квартира, реконструированный доходный дом Покотиловой под апартаменты. Архитектура продолжает линию северного модерна. Ключи выданы в 2024 году. Требования к отделке общих зон здесь самые высокие из всех наших объектов.</p>
+          <dl class="spec">
+          <div><dt>Застройщик</dt><dd>ПСК</dd></div>
+          <div><dt>Район</dt><dd>Петроградский, м. Петроградская</dd></div>
+          <div><dt>Адрес</dt><dd>Набережная реки Карповки, 31</dd></div>
+          <div><dt>Этажность</dt><dd>3–8</dd></div>
+          <div><dt>Класс</dt><dd>Премиум</dd></div>
+          <div><dt>Сдан</dt><dd>2024</dd></div>
+          <div><dt>Наши работы</dt><dd>Входные группы</dd></div>
+          </dl>
+          <div class="proj__cta">
+            <button class="cta cta--solid magnet" type="button" data-gal="severnayakorona">Смотреть галерею</button>
+            <a class="cta magnet" href="zayavka.html?p=%D0%96%D0%9A%20%C2%AB%D0%A1%D0%B5%D0%B2%D0%B5%D1%80%D0%BD%D0%B0%D1%8F%20%D0%BA%D0%BE%D1%80%D0%BE%D0%BD%D0%B0%C2%BB">Обсудить отделку</a>
+          </div>
+        </div>
+      </article>
     </div>
   </section>
 
@@ -216,9 +299,7 @@
 <footer class="ftr">
   <div class="wrap">
     <div class="ftr__top">
-      <a class="ftr__logo" href="index.html" aria-label="Траектория, на главную">
-        <img src="assets/img/brand/logo-light.svg" alt="Траектория" width="180" height="54" loading="lazy">
-      </a>
+      <a class="mark ftr__mark-a" href="index.html" aria-label="Траектория, на главную">Траектория</a>
       <div class="ftr__cols">
         <div class="ftr__col">
           <span class="label">Загородное</span>
@@ -255,6 +336,64 @@
   </div>
 </div>
 
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
+  <div class="modal__veil" data-modal-close></div>
+  <div class="modal__box" role="document">
+    <button class="modal__x" type="button" data-modal-close aria-label="Закрыть">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg>
+    </button>
+    <div class="modal__in">
+      <span class="label label--brand" id="modalKicker">Заявка</span>
+      <h2 class="modal__t" id="modalTitle">Обсудим ваш проект</h2>
+      <p class="modal__lead" id="modalLead">Оставьте телефон, перезвоним и уточним задачу. Это ни к чему не обязывает.</p>
+
+      <form class="form form--tight" data-form novalidate>
+        <div class="two">
+          <div class="field">
+            <label>Как к вам обращаться</label>
+            <input name="name" type="text" autocomplete="name" placeholder="Имя">
+          </div>
+          <div class="field">
+            <label>Телефон</label>
+            <input name="tel" type="tel" autocomplete="tel" required placeholder="+7">
+          </div>
+        </div>
+        <div class="field">
+          <label>Направление</label>
+          <select name="kind">
+            <option>Строительство загородного дома</option>
+            <option>Отделка квартиры в новостройке</option>
+            <option>Входные группы в жилом комплексе</option>
+            <option>Внутренняя отделка дома</option>
+            <option>Пока не определился</option>
+          </select>
+        </div>
+        <input name="proj" type="hidden" value="">
+        <div class="field">
+          <label>Коротко о задаче</label>
+          <textarea name="msg" rows="3" placeholder="Участок, площадь, сроки, бюджет: всё, что уже понятно"></textarea>
+        </div>
+        <label class="agree">
+          <input name="ok" type="checkbox" required>
+          <span>Согласен на обработку персональных данных в соответствии с
+            <a href="#" data-policy>политикой обработки</a>.</span>
+        </label>
+        <button class="cta cta--solid form__send magnet" type="submit">Отправить заявку</button>
+        <p class="form__note" data-note>Перезваниваем в рабочее время. Если срочно, быстрее позвонить: <a class="mono" href="tel:+79119230903">+7 911 923-09-03</a>.</p>
+      </form>
+
+      <div class="thanks" data-done role="status">
+        <span class="tick" aria-hidden="true">
+          <svg viewBox="0 0 52 52"><circle class="tick__o" cx="26" cy="26" r="23"/><path class="tick__c" d="M15 27l8 8 15-16"/></svg>
+        </span>
+        <h3>Спасибо, заявка у нас</h3>
+        <p>Перезвоним на указанный номер. Если нужно быстрее — <a class="mono" href="tel:+79119230903">+7 911 923-09-03</a>.</p>
+        <button class="cta magnet" type="button" data-modal-close>Закрыть</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Просмотр объекта">
   <div class="lb__bar">
     <span class="lb__title" id="lbTitle"></span>
@@ -283,7 +422,7 @@
 </script>
 
 <script>
-window.GALLERIES={"chistoenebo": {"title": "ЖК Чистое небо", "imgs": ["assets/img/jk/chistoe-nebo-01.jpg", "assets/img/jk/chistoe-nebo-02.jpg", "assets/img/jk/chistoe-nebo-03.jpg", "assets/img/jk/chistoe-nebo-04.jpg", "assets/img/jk/chistoe-nebo-05.jpg", "assets/img/jk/chistoe-nebo-06.jpg", "assets/img/jk/chistoe-nebo-07.jpg", "assets/img/jk/chistoe-nebo-08.jpg", "assets/img/jk/chistoe-nebo-09.jpg", "assets/img/jk/chistoe-nebo-10.jpg", "assets/img/jk/chistoe-nebo-11.jpg", "assets/img/jk/chistoe-nebo-12.jpg"]}, "univercity": {"title": "ЖК Univer City", "imgs": ["assets/img/jk/univer-city-01.jpg", "assets/img/jk/univer-city-02.jpg", "assets/img/jk/univer-city-03.jpg", "assets/img/jk/univer-city-04.jpg", "assets/img/jk/univer-city-05.jpg", "assets/img/jk/univer-city-06.jpg", "assets/img/jk/univer-city-07.jpg", "assets/img/jk/univer-city-08.jpg", "assets/img/jk/univer-city-09.jpg", "assets/img/jk/univer-city-10.jpg", "assets/img/jk/univer-city-11.jpg", "assets/img/jk/univer-city-12.jpg", "assets/img/jk/univer-city-13.jpg", "assets/img/jk/univer-city-14.jpg", "assets/img/jk/univer-city-15.jpg", "assets/img/jk/univer-city-16.jpg"]}, "svetlanapark2": {"title": "ЖК Светлана Парк 2", "imgs": ["assets/img/jk/svetlana-park-2-01.jpg", "assets/img/jk/svetlana-park-2-02.jpg", "assets/img/jk/svetlana-park-2-03.jpg", "assets/img/jk/svetlana-park-2-04.jpg", "assets/img/jk/svetlana-park-2-05.jpg", "assets/img/jk/svetlana-park-2-06.jpg", "assets/img/jk/svetlana-park-2-07.jpg", "assets/img/jk/svetlana-park-2-08.jpg", "assets/img/jk/svetlana-park-2-09.jpg", "assets/img/jk/svetlana-park-2-10.jpg"]}, "panorama": {"title": "ЖК Панорама Парк Сосновка", "imgs": ["assets/img/jk/panorama-park-01.jpg", "assets/img/jk/panorama-park-02.jpg", "assets/img/jk/panorama-park-03.jpg", "assets/img/jk/panorama-park-04.jpg", "assets/img/jk/panorama-park-05.jpg", "assets/img/jk/panorama-park-06.jpg", "assets/img/jk/panorama-park-07.jpg", "assets/img/jk/panorama-park-08.jpg", "assets/img/jk/panorama-park-09.jpg", "assets/img/jk/panorama-park-10.jpg"]}, "svetlanapark1": {"title": "ЖК Светлана Парк 1", "imgs": ["assets/img/jk/svetlana-park-1-01.jpg", "assets/img/jk/svetlana-park-1-02.jpg", "assets/img/jk/svetlana-park-1-03.jpg", "assets/img/jk/svetlana-park-1-04.jpg", "assets/img/jk/svetlana-park-1-05.jpg", "assets/img/jk/svetlana-park-1-06.jpg", "assets/img/jk/svetlana-park-1-07.jpg", "assets/img/jk/svetlana-park-1-08.jpg", "assets/img/jk/svetlana-park-1-09.jpg", "assets/img/jk/svetlana-park-1-10.jpg"]}, "severnayakorona": {"title": "Северная Корона", "imgs": ["assets/img/jk/severnaya-korona-01.jpg", "assets/img/jk/severnaya-korona-02.jpg", "assets/img/jk/severnaya-korona-03.jpg", "assets/img/jk/severnaya-korona-04.jpg", "assets/img/jk/severnaya-korona-05.jpg", "assets/img/jk/severnaya-korona-06.jpg", "assets/img/jk/severnaya-korona-07.jpg", "assets/img/jk/severnaya-korona-08.jpg", "assets/img/jk/severnaya-korona-09.jpg", "assets/img/jk/severnaya-korona-10.jpg"]}};
+window.GALLERIES={"chistoenebo": {"title": "ЖК «Чистое небо»", "imgs": ["assets/img/jk/chistoe-nebo-01.jpg", "assets/img/jk/chistoe-nebo-02.jpg", "assets/img/jk/chistoe-nebo-03.jpg", "assets/img/jk/chistoe-nebo-04.jpg", "assets/img/jk/chistoe-nebo-05.jpg", "assets/img/jk/chistoe-nebo-06.jpg", "assets/img/jk/chistoe-nebo-07.jpg", "assets/img/jk/chistoe-nebo-08.jpg", "assets/img/jk/chistoe-nebo-09.jpg", "assets/img/jk/chistoe-nebo-10.jpg", "assets/img/jk/chistoe-nebo-11.jpg", "assets/img/jk/chistoe-nebo-12.jpg"]}, "univercity": {"title": "ЖК Univer City", "imgs": ["assets/img/jk/univer-city-01.jpg", "assets/img/jk/univer-city-02.jpg", "assets/img/jk/univer-city-03.jpg", "assets/img/jk/univer-city-04.jpg", "assets/img/jk/univer-city-05.jpg", "assets/img/jk/univer-city-06.jpg", "assets/img/jk/univer-city-07.jpg", "assets/img/jk/univer-city-08.jpg", "assets/img/jk/univer-city-09.jpg", "assets/img/jk/univer-city-10.jpg", "assets/img/jk/univer-city-11.jpg", "assets/img/jk/univer-city-12.jpg", "assets/img/jk/univer-city-13.jpg", "assets/img/jk/univer-city-14.jpg", "assets/img/jk/univer-city-15.jpg", "assets/img/jk/univer-city-16.jpg"]}, "svetlanapark2": {"title": "Svetlana Park, вторая очередь", "imgs": ["assets/img/jk/svetlana-park-2-01.jpg", "assets/img/jk/svetlana-park-2-02.jpg", "assets/img/jk/svetlana-park-2-03.jpg", "assets/img/jk/svetlana-park-2-04.jpg", "assets/img/jk/svetlana-park-2-05.jpg", "assets/img/jk/svetlana-park-2-06.jpg", "assets/img/jk/svetlana-park-2-07.jpg", "assets/img/jk/svetlana-park-2-08.jpg", "assets/img/jk/svetlana-park-2-09.jpg", "assets/img/jk/svetlana-park-2-10.jpg"]}, "panorama": {"title": "ЖК «Панорама парк Сосновка»", "imgs": ["assets/img/jk/panorama-park-01.jpg", "assets/img/jk/panorama-park-02.jpg", "assets/img/jk/panorama-park-03.jpg", "assets/img/jk/panorama-park-04.jpg", "assets/img/jk/panorama-park-05.jpg", "assets/img/jk/panorama-park-06.jpg", "assets/img/jk/panorama-park-07.jpg", "assets/img/jk/panorama-park-08.jpg", "assets/img/jk/panorama-park-09.jpg", "assets/img/jk/panorama-park-10.jpg"]}, "svetlanapark1": {"title": "Svetlana Park, первая очередь", "imgs": ["assets/img/jk/svetlana-park-1-01.jpg", "assets/img/jk/svetlana-park-1-02.jpg", "assets/img/jk/svetlana-park-1-03.jpg", "assets/img/jk/svetlana-park-1-04.jpg", "assets/img/jk/svetlana-park-1-05.jpg", "assets/img/jk/svetlana-park-1-06.jpg", "assets/img/jk/svetlana-park-1-07.jpg", "assets/img/jk/svetlana-park-1-08.jpg", "assets/img/jk/svetlana-park-1-09.jpg", "assets/img/jk/svetlana-park-1-10.jpg"]}, "severnayakorona": {"title": "ЖК «Северная корона»", "imgs": ["assets/img/jk/severnaya-korona-01.jpg", "assets/img/jk/severnaya-korona-02.jpg", "assets/img/jk/severnaya-korona-03.jpg", "assets/img/jk/severnaya-korona-04.jpg", "assets/img/jk/severnaya-korona-05.jpg", "assets/img/jk/severnaya-korona-06.jpg", "assets/img/jk/severnaya-korona-07.jpg", "assets/img/jk/severnaya-korona-08.jpg", "assets/img/jk/severnaya-korona-09.jpg", "assets/img/jk/severnaya-korona-10.jpg"]}};
 </script>
 <script src="assets/site.js"></script>
 </body>

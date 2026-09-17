@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """Сборка страниц сайта."""
 import json, os, re, datetime
+from urllib.parse import quote
 
 OUT = os.path.dirname(os.path.abspath(__file__))
 CDN = "https://static.tildacdn.com/"
@@ -198,7 +199,7 @@ FONT_URL = "https://static.tildacdn.com/tild6334-3065-4266-b863-353138363161/Mag
 
 NAV = [
     ("villageprojects.html", "З-01", "Проекты домов"),
-    ("villagerealization.html", "З-02", "Реализация"),
+    ("villagerealization.html", "З-02", "Как это выглядит"),
     ("projects.html", "Ж-01", "ЖК: входные группы"),
     ("otdelkajk.html", "Ж-02", "ЖК: отделка квартир"),
     ("partners.html", "П", "Партнёры"),
@@ -220,7 +221,9 @@ def head(title, desc, here, og=None):
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{title}</title>
 <meta name="description" content="{desc}">
-<meta name="theme-color" content="#0e1216">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#ffffff">
+<script>(function(){{var t;try{{t=localStorage.getItem('tr-theme');}}catch(e){{}}document.documentElement.setAttribute('data-theme',t==='dark'?'dark':'light');if(t==='dark'){{var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content','#0e1216');}}}})();</script>
 <link rel="icon" href="{LOGO}">
 <meta property="og:type" content="website">
 <meta property="og:title" content="{title}">
@@ -236,6 +239,7 @@ def head(title, desc, here, og=None):
 <script>document.documentElement.classList.replace('no-js','js');</script>
 
 <a class="skip" href="#main">Перейти к содержанию</a>
+<div class="rules" aria-hidden="true"><i></i></div>
 <div class="grain" aria-hidden="true"></div>
 <div class="cur" id="cur" aria-hidden="true"><span class="cur__t">ТЯНИ</span></div>
 <div class="cur-dot" id="curDot" aria-hidden="true"></div>
@@ -257,12 +261,13 @@ def head(title, desc, here, og=None):
 
 <header class="hdr" id="hdr">
   <div class="hdr__in">
-    <a class="hdr__logo" href="index.html" aria-label="Траектория, на главную">
-      <img src="{LOGO}" alt="Траектория" width="160" height="38">
-    </a>
+    <a class="mark hdr__mark" href="index.html" aria-label="Траектория, на главную">Траектория</a>
     <nav class="hdr__nav" aria-label="Основное">
       <a class="hdr__tel mono" href="{TELH}">{TEL}</a>
-      <a class="cta magnet" href="contacts.html">Обсудить проект</a>
+      <a class="cta magnet" href="zayavka.html">Обсудить проект</a>
+      <button class="tgl" id="theme" type="button" aria-label="Включить тёмную тему" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.4"/><path d="M12 3.6a8.4 8.4 0 0 0 0 16.8z"/></svg>
+      </button>
       <button class="burger" id="burger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="sheet">
         <i></i><i></i>
       </button>
@@ -355,14 +360,12 @@ def tail(galleries=None, shots=None, phrases=None):
 <footer class="ftr">
   <div class="wrap">
     <div class="ftr__top">
-      <a class="ftr__logo" href="index.html" aria-label="Траектория, на главную">
-        <img src="{LOGO_F}" alt="Траектория" width="180" height="54" loading="lazy">
-      </a>
+      <a class="mark ftr__mark-a" href="index.html" aria-label="Траектория, на главную">Траектория</a>
       <div class="ftr__cols">
         <div class="ftr__col">
           <span class="label">Загородное</span>
           <a href="villageprojects.html">Проекты домов</a>
-          <a href="villagerealization.html">Реализация</a>
+          <a href="villagerealization.html">Как это выглядит</a>
         </div>
         <div class="ftr__col">
           <span class="label">Жилые комплексы</span>
@@ -374,9 +377,11 @@ def tail(galleries=None, shots=None, phrases=None):
           <a href="about.html">О нас</a>
           <a href="partners.html">Партнёры</a>
           <a href="contacts.html">Контакты</a>
+          <a href="zayavka.html">Оставить заявку</a>
         </div>
       </div>
     </div>
+    <div class="ftr__mark" aria-hidden="true">ТРАЕКТОРИЯ</div>
     <div class="ftr__bot">
       <span>© <span id="yr">2026</span> Траектория · с {YEAR_FOUNDED} года</span>
       <span>Санкт-Петербург · Ленинградская область</span>
@@ -388,7 +393,65 @@ def tail(galleries=None, shots=None, phrases=None):
 <div class="dock" id="dock">
   <div class="dock__in">
     <a class="cta cta--solid" href="{TELH}">Позвонить</a>
-    <a class="cta" href="contacts.html">Контакты</a>
+    <a class="cta" href="zayavka.html">Заявка</a>
+  </div>
+</div>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
+  <div class="modal__veil" data-modal-close></div>
+  <div class="modal__box" role="document">
+    <button class="modal__x" type="button" data-modal-close aria-label="Закрыть">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg>
+    </button>
+    <div class="modal__in">
+      <span class="label label--brand" id="modalKicker">Заявка</span>
+      <h2 class="modal__t" id="modalTitle">Обсудим ваш проект</h2>
+      <p class="modal__lead" id="modalLead">Оставьте телефон, перезвоним и уточним задачу. Это ни к чему не обязывает.</p>
+
+      <form class="form form--tight" data-form novalidate>
+        <div class="two">
+          <div class="field">
+            <label>Как к вам обращаться</label>
+            <input name="name" type="text" autocomplete="name" placeholder="Имя">
+          </div>
+          <div class="field">
+            <label>Телефон</label>
+            <input name="tel" type="tel" autocomplete="tel" required placeholder="+7">
+          </div>
+        </div>
+        <div class="field">
+          <label>Направление</label>
+          <select name="kind">
+            <option>Строительство загородного дома</option>
+            <option>Отделка квартиры в новостройке</option>
+            <option>Входные группы в жилом комплексе</option>
+            <option>Внутренняя отделка дома</option>
+            <option>Пока не определился</option>
+          </select>
+        </div>
+        <input name="proj" type="hidden" value="">
+        <div class="field">
+          <label>Коротко о задаче</label>
+          <textarea name="msg" rows="3" placeholder="Участок, площадь, сроки, бюджет: всё, что уже понятно"></textarea>
+        </div>
+        <label class="agree">
+          <input name="ok" type="checkbox" required>
+          <span>Согласен на обработку персональных данных в соответствии с
+            <a href="#" data-policy>политикой обработки</a>.</span>
+        </label>
+        <button class="cta cta--solid form__send magnet" type="submit">Отправить заявку</button>
+        <p class="form__note" data-note>Перезваниваем в рабочее время. Если срочно, быстрее позвонить: <a class="mono" href="{TELH}">{TEL}</a>.</p>
+      </form>
+
+      <div class="thanks" data-done role="status">
+        <span class="tick" aria-hidden="true">
+          <svg viewBox="0 0 52 52"><circle class="tick__o" cx="26" cy="26" r="23"/><path class="tick__c" d="M15 27l8 8 15-16"/></svg>
+        </span>
+        <h3>Спасибо, заявка у нас</h3>
+        <p>Перезвоним на указанный номер. Если нужно быстрее — <a class="mono" href="{TELH}">{TEL}</a>.</p>
+        <button class="cta magnet" type="button" data-modal-close>Закрыть</button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -442,7 +505,8 @@ def page_header(kicker, title_lines, lead=None, bg=None, crumbs=None):
         crumb_html = f'        <div class="crumbs rv">{"".join(parts)}</div>\n'
     lead_html = f'        <p class="phead__lead rv" style="--dl:120ms">{lead}</p>\n' if lead else ""
     return f"""  <section class="{cls}">
-{bg_html}    <div class="phead__in wrap grid">
+{bg_html}    <span class="marks" aria-hidden="true"></span>
+    <div class="phead__in wrap grid">
       <span class="label">{kicker}</span>
       <div>
 {crumb_html}        <h1>
@@ -461,6 +525,9 @@ def cards(items):
           <span class="card__img"><img src="{cover}" alt="{name}" loading="lazy" decoding="async"></span>
           <span class="card__veil"></span>
           <span class="card__no">{i+1:02d}</span>
+          <span class="card__go" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg>
+          </span>
           <span class="card__body">
             <span class="card__name">{name}</span>
             <span class="card__meta">{meta}</span>
@@ -489,6 +556,65 @@ def localize(html):
     return html
 
 
+def objects_long(items, kicker="Объект", cta="Обсудить объект"):
+    """Развёрнутый блок объекта: обложка, описание, характеристики, кнопки."""
+    out = []
+    for i, (key, name, sub, imgs, txt, spec) in enumerate(items):
+        rows = "\n".join(
+            '          <div><dt>%s</dt><dd>%s</dd></div>' % (k, v) for k, v in spec)
+        out.append("""      <article class="proj">
+        <button class="proj__media rv" type="button" data-gal="%s" aria-label="Смотреть галерею: %s">
+          <img src="%s" alt="%s" loading="lazy" decoding="async">
+          <span class="proj__no">%02d</span>
+          <span class="proj__count">%d фото</span>
+        </button>
+        <div class="rv" style="--dl:90ms">
+          <span class="label label--brand">%s</span>
+          <h2 class="proj__name">%s</h2>
+          <p class="proj__sub">%s</p>
+          <p class="proj__txt">%s</p>
+          <dl class="spec">
+%s
+          </dl>
+          <div class="proj__cta">
+            <button class="cta cta--solid magnet" type="button" data-gal="%s">Смотреть галерею</button>
+            <a class="cta magnet" href="zayavka.html?p=%s">%s</a>
+          </div>
+        </div>
+      </article>""" % (key, name, imgs[0], name, i + 1, len(imgs),
+                       kicker, name, sub, txt, rows, key, quote(name), cta))
+    return "\n".join(out)
+
+
+def projects_long(items):
+    out = []
+    for i, (key, code, sub, imgs, txt, spec) in enumerate(items):
+        rows = "\n".join(
+            '          <div><dt>%s</dt><dd>%s</dd></div>' % (k, v) for k, v in spec)
+        out.append("""      <article class="proj">
+        <button class="proj__media rv" type="button" data-gal="%s" aria-label="Смотреть галерею: %s">
+          <img src="%s" alt="%s, %s" loading="lazy" decoding="async">
+          <span class="proj__no">%02d</span>
+          <span class="proj__count">%d фото</span>
+        </button>
+        <div class="rv" style="--dl:90ms">
+          <span class="label label--brand">Проект</span>
+          <h2 class="proj__name">%s</h2>
+          <p class="proj__sub">%s</p>
+          <p class="proj__txt">%s</p>
+          <dl class="spec">
+%s
+          </dl>
+          <div class="proj__cta">
+            <a class="cta cta--solid magnet" href="zayavka.html?p=%s">Хочу этот проект</a>
+            <button class="cta magnet" type="button" data-gal="%s">Смотреть галерею</button>
+          </div>
+        </div>
+      </article>""" % (key, code, imgs[0], code, sub, i + 1, len(imgs),
+                       code, sub, txt, rows, quote(code + " " + sub), key))
+    return "\n".join(out)
+
+
 def write(name, html):
     html = localize(html)
     with open(os.path.join(OUT, name), "w", encoding="utf-8") as f:
@@ -505,6 +631,8 @@ home += f"""
     <div class="phead__bg" data-parallax aria-hidden="true" style="inset:-8% 0">
       <img src="{HOME_SHOTS[0]}" alt="" data-hero-img fetchpriority="high" decoding="async" style="opacity:1">
     </div>
+    <span class="marks" aria-hidden="true"></span>
+    <span class="edge" aria-hidden="true">Строительство и отделка</span>
     <div class="phead__in wrap grid">
       <span class="label">Санкт-Петербург</span>
       <div>
@@ -521,6 +649,7 @@ home += f"""
             <div style="display:grid;gap:6px"><span class="label">Долгота</span><b class="mono" style="font-family:var(--display);font-size:clamp(15px,1.15vw,19px)">30.239709</b></div>
           </div>
         </div>
+        <div class="cue rv" style="--dl:320ms"><i></i><span class="label">Листайте</span></div>
       </div>
     </div>
   </section>
@@ -604,23 +733,78 @@ write("index.html", home)
 
 # ════════════════════════ ВХОДНЫЕ ГРУППЫ ════════════════════════
 JK = [
-    ("chistoenebo", "ЖК Чистое небо", CHISTOE),
-    ("univercity", "ЖК Univer City", UNIVER),
-    ("svetlanapark2", "ЖК Светлана Парк 2", SVETLANA2),
-    ("panorama", "ЖК Панорама Парк Сосновка", PANORAMA),
-    ("svetlanapark1", "ЖК Светлана Парк 1", SVETLANA1),
-    ("severnayakorona", "Северная Корона", KORONA),
+    ("chistoenebo", "ЖК «Чистое небо»", "Setl Group · Приморский район", CHISTOE,
+     "Квартал на 98 гектарах у реки Каменка: тридцать четыре корпуса переменной этажности, "
+     "от семи до двадцати пяти этажей, сданные с 2017 по 2023 год. Дома кирпично-монолитные, "
+     "фасад комбинированный: оштукатуренный низ и вентилируемая облицовка выше. Дворы без машин, "
+     "парковки убраны под землю. Мы отделывали входные группы: тамбуры, холлы и лестничные узлы.",
+     [("Застройщик", "Setl Group"), ("Район", "Приморский, м. Комендантский проспект"),
+      ("Корпуса", "34, в четырнадцати очередях"), ("Этажность", "7–25"),
+      ("Сдан", "2017–2023"), ("Наши работы", "Входные группы")]),
+
+    ("univercity", "ЖК Univer City", "Setl Group · Пушкинский район", UNIVER,
+     "Малоэтажный квартал в Шушарах: двенадцать корпусов по четыре-пять этажей, кирпично-монолитных, "
+     "с фасадами из керамогранита, кирпича и декоративной штукатурки в тёплой гамме. "
+     "На территории школа с предуниверсарием, два детских сада и парк. Сдача корпусов идёт "
+     "очередями до 2029 года. Здесь мы работаем и по входным группам, и по отделке квартир.",
+     [("Застройщик", "Setl Group"), ("Район", "Пушкинский, Шушары"),
+      ("Адрес", "Колпинское шоссе, 129"), ("Корпуса", "12"),
+      ("Этажность", "4–5"), ("Сдача", "очередями до 2029"),
+      ("Наши работы", "Входные группы, отделка квартир")]),
+
+    ("svetlanapark2", "Svetlana Park, вторая очередь", "Setl Group · Выборгский район", SVETLANA2,
+     "Вторая очередь квартала на месте объединения «Светлана»: корпуса 2.1 и 2.2, тысяча девяносто пять "
+     "квартир, разрешение на ввод получено летом 2023 года. Класс бизнес, десять этажей, потолки три метра. "
+     "Навесной фасад из облицовочного клинкерного кирпича. Уровень отделки мест общего пользования "
+     "здесь выше обычного — работали по индивидуальным решениям.",
+     [("Застройщик", "Setl Group"), ("Район", "Выборгский, м. Удельная"),
+      ("Адрес", "Манчестерская улица, 3"), ("Корпуса", "2.1 и 2.2"),
+      ("Этажность", "10"), ("Класс", "Бизнес"), ("Сдан", "2023"),
+      ("Наши работы", "Входные группы")]),
+
+    ("panorama", "ЖК «Панорама парк Сосновка»", "Setl Group · Выборгский район", PANORAMA,
+     "Квартал между Удельным парком и Сосновкой: четыре очереди, девять-двенадцать этажей, "
+     "сдача с 2022 по 2024 год. Кирпично-монолитные дома, фасады из керамогранита и кирпича "
+     "с контрастными плитами. Через территорию проходит пешеходный бульвар почти в километр, "
+     "связывающий два парка. Безбарьерная среда: пандусы и подъёмники во всех подъездах.",
+     [("Застройщик", "Setl Group"), ("Район", "Выборгский, м. Удельная"),
+      ("Адрес", "Светлановский проспект, 8"), ("Очереди", "4"),
+      ("Этажность", "9–12"), ("Сдан", "2022–2024"),
+      ("Наши работы", "Входные группы")]),
+
+    ("svetlanapark1", "Svetlana Park, первая очередь", "Setl Group · Выборгский район", SVETLANA1,
+     "Первая очередь того же квартала: корпуса 1.1 и 1.2, тысяча девяносто квартир, "
+     "введены в начале 2022 года. Во дворе дендропарк с искусственным рельефом и хвойными — "
+     "ландшафт задаёт тон и входным группам, поэтому отделка холлов подбиралась под него: "
+     "спокойная палитра, натуральные фактуры, много естественного света.",
+     [("Застройщик", "Setl Group"), ("Район", "Выборгский, м. Удельная"),
+      ("Адрес", "Манчестерская улица, 3"), ("Корпуса", "1.1 и 1.2"),
+      ("Этажность", "10"), ("Класс", "Бизнес"), ("Сдан", "2022"),
+      ("Наши работы", "Входные группы")]),
+
+    ("severnayakorona", "ЖК «Северная корона»", "ПСК · Петроградский район", KORONA,
+     "Премиальный комплекс на набережной Карповки, построенный на месте гостиницы, "
+     "простоявшей недостроенной три десятилетия. Малоэтажные корпуса в три-восемь этажей, "
+     "триста шестьдесят одна квартира, реконструированный доходный дом Покотиловой под апартаменты. "
+     "Архитектура продолжает линию северного модерна. Ключи выданы в 2024 году. "
+     "Требования к отделке общих зон здесь самые высокие из всех наших объектов.",
+     [("Застройщик", "ПСК"), ("Район", "Петроградский, м. Петроградская"),
+      ("Адрес", "Набережная реки Карповки, 31"), ("Этажность", "3–8"),
+      ("Класс", "Премиум"), ("Сдан", "2024"),
+      ("Наши работы", "Входные группы")]),
 ]
-gal = {k: {"title": n, "imgs": im} for k, n, im in JK}
-p = head("Входные группы | Траектория",
-         "Входные группы в жилых комплексах Санкт-Петербурга: Чистое небо, Univer City, Светлана Парк, Панорама Парк Сосновка, Северная Корона.",
+gal = {k: {"title": n, "imgs": im} for k, n, sub, im, txt, sp in JK}
+p = head("Входные группы в ЖК | Траектория",
+         "Отделка входных групп в жилых комплексах Санкт-Петербурга: «Чистое небо», Univer City, "
+         "Svetlana Park, «Панорама парк Сосновка», «Северная корона».",
          "projects.html", og=CHISTOE[0])
 p += page_header("Жилые комплексы", ["Входные", "группы"],
-                 "Отделка входных групп в жилых комплексах Санкт-Петербурга. Нажмите на объект, чтобы посмотреть галерею.",
+                 "Тамбуры, холлы, лестничные узлы и места общего пользования в новостройках "
+                 "Петербурга. Шесть комплексов, от комфорт-класса до премиума.",
                  bg=KORONA[0], crumbs="Входные группы")
-p += '  <section class="section">\n    <div class="wrap grid">\n      <span class="label">Объекты</span>\n      <div>\n'
-p += cards([(k, n, f"{len(im)} фото", im[0]) for k, n, im in JK])
-p += "\n      </div>\n    </div>\n  </section>\n"
+p += '  <section class="section">\n    <div class="wrap">\n'
+p += objects_long(JK, kicker="Объект", cta="Обсудить отделку")
+p += "\n    </div>\n  </section>\n"
 p += contacts_block()
 p += nxt("otdelkajk.html", "Дальше", "Отделка квартир в ЖК")
 p += tail(galleries=gal)
@@ -628,49 +812,126 @@ write("projects.html", p)
 
 # ════════════════════════ ОТДЕЛКА КВАРТИР ════════════════════════
 OT = [
-    ("otd_univer", "ЖК Univer City", OTD_UNIVER),
-    ("otd_che", "ЖК «CHE»", OTD_CHE),
+    ("otd_univer", "ЖК Univer City", "Setl Group · Пушкинский район", OTD_UNIVER,
+     "Квартиры в малоэтажных корпусах на Колпинском шоссе. Работаем от чернового состояния: "
+     "разводка электрики и воды, выравнивание стен и стяжка пола, санузлы под ключ, "
+     "финишная отделка и установка дверей. Планировки в проекте компактные, поэтому основная "
+     "задача — собрать хранение и инженерию так, чтобы они не съедали метры.",
+     [("Комплекс", "Univer City"), ("Застройщик", "Setl Group"),
+      ("Район", "Пушкинский, Шушары"), ("Тип работ", "Отделка под ключ"),
+      ("Состав", "Электрика, сантехника, стяжка, штукатурка, финиш"),
+      ("Материалы", "КРЕПС, поставка через Петровича")]),
+
+    ("otd_che", "ЖК «Чистое небо»", "Setl Group · Приморский район", OTD_CHE,
+     "Квартиры в квартале на Комендантском проспекте. Здесь чаще берут полный цикл: "
+     "перепланировка в рамках допустимого, выравнивание поверхностей, санузлы, "
+     "чистовая отделка и подготовка под мебель. Дома кирпично-монолитные, "
+     "что даёт свободу в расстановке перегородок и разводке инженерии.",
+     [("Комплекс", "Чистое небо"), ("Застройщик", "Setl Group"),
+      ("Район", "Приморский, м. Комендантский проспект"),
+      ("Тип работ", "Отделка под ключ"),
+      ("Состав", "Электрика, сантехника, стяжка, штукатурка, финиш"),
+      ("Материалы", "КРЕПС, поставка через Петровича")]),
 ]
-gal = {k: {"title": n, "imgs": im} for k, n, im in OT}
+gal = {k: {"title": n, "imgs": im} for k, n, sub, im, txt, sp in OT}
 p = head("Отделка квартир в ЖК | Траектория",
-         "Внутренняя отделка квартир в новостройках Санкт-Петербурга: ЖК Univer City, ЖК «CHE». Полный цикл работ.",
+         "Внутренняя отделка квартир в новостройках Санкт-Петербурга: ЖК Univer City, "
+         "ЖК «Чистое небо». Полный цикл от чернового состояния до готового интерьера.",
          "otdelkajk.html", og=OTD_UNIVER[0])
 p += page_header("Жилые комплексы", ["Внутренняя отделка", "квартир"],
-                 "Превращаем квартиры в новостройках в уютные и стильные пространства: от чернового состояния до готового интерьера.",
+                 "Превращаем квартиры в новостройках в готовые к жизни пространства: "
+                 "от чернового состояния до финишной отделки.",
                  bg=OTD_UNIVER[1], crumbs="Отделка квартир")
-p += '  <section class="section">\n    <div class="wrap grid">\n      <span class="label">Объекты</span>\n      <div>\n'
-p += cards([(k, n, f"{len(im)} фото", im[0]) for k, n, im in OT])
-p += "\n      </div>\n    </div>\n  </section>\n"
+p += '  <section class="section">\n    <div class="wrap">\n'
+p += objects_long(OT, kicker="Объект", cta="Обсудить отделку")
+p += "\n    </div>\n  </section>\n"
 p += contacts_block()
 p += nxt("partners.html", "Дальше", "Наши партнёры")
 p += tail(galleries=gal)
 write("otdelkajk.html", p)
 
 # ════════════════════════ ЗАГОРОДНОЕ: ПРОЕКТЫ ════════════════════════
-TR = [("tr0%d" % (i + 1), '«ТР» 0%d' % (i + 1), VILLAGE[i * 6:(i + 1) * 6]) for i in range(4)]
-gal = {k: {"title": n, "imgs": im} for k, n, im in TR}
+def pick(*n):
+    return [VILLAGE[i - 1] for i in n]
+
+
+TR = [
+    ("tr01", "ТР 01", "Одноэтажный с плоской кровлей",
+     pick(2, 12, 15, 13, 10, 11, 14),
+     "Дом одной плоскости: единая кровля с широким выносом накрывает и жилой объём, "
+     "и террасу. Вынос работает как козырёк, летом убирает прямое солнце из панорамных "
+     "окон, зимой прикрывает вход. Светлая штукатурка и рваный камень дают контраст "
+     "фактур при почти полном отсутствии декора.",
+     [("Этажность", "Один этаж"),
+      ("Кровля", "Плоская, с широким выносом"),
+      ("Фасад", "Декоративная штукатурка и натуральный камень"),
+      ("Остекление", "Панорамное в пол, раздвижные створки"),
+      ("Терраса", "Под выносом кровли, на каменных опорах"),
+      ("Свет", "Линейная подсветка по периметру выноса")]),
+
+    ("tr02", "ТР 02", "Одноэтажный с четырёхскатной кровлей",
+     pick(3, 18, 17, 19, 20, 16),
+     "Спокойный дом привычной формы: четырёхскатная кровля, светлые стены, тёплая "
+     "деревянная столярка. Скат уходит вбок и накрывает террасу, поэтому она "
+     "воспринимается частью дома, а не пристройкой. Вариант для тех, кому плоская "
+     "кровля кажется чужой в загородном пейзаже.",
+     [("Этажность", "Один этаж"),
+      ("Кровля", "Четырёхскатная, черепица графитового цвета"),
+      ("Фасад", "Светлая декоративная штукатурка"),
+      ("Столярка", "Тёплый древесный тон, окна и двери в одном ключе"),
+      ("Терраса", "Боковая, под общим скатом кровли"),
+      ("Вход", "С фронтальной стороны, под навесом")]),
+
+    ("tr03", "ТР 03", "Двухэтажный с навесом для машины",
+     pick(1, 7, 8, 5, 6, 9),
+     "Второй этаж вынесен вперёд и работает как козырёк: под ним помещаются машина "
+     "и терраса, а первый этаж получает тень. Верхний объём облицован камнем и "
+     "визуально тяжелее нижнего, отсюда ощущение, что дом стоит на опорах. "
+     "Первый этаж остеклён в пол почти по всему периметру.",
+     [("Этажность", "Два этажа"),
+      ("Кровля", "Плоская"),
+      ("Фасад", "Белая штукатурка, верхний объём в натуральном камне"),
+      ("Остекление", "Панорамное в пол на первом этаже"),
+      ("Машина", "Навес под консолью второго этажа"),
+      ("Балкон", "Второй этаж, металлическое ограждение")]),
+
+    ("tr04", "ТР 04", "Двухэтажный для участка со склоном",
+     pick(4, 23, 22, 21, 24, 25),
+     "Дом посажен на перепад рельефа: гараж и хозяйственная часть уходят в нижний "
+     "уровень, жилой этаж выходит на террасу уже на отметке верхней площадки. "
+     "Белая штукатурка разбита тёмными вставками под кирпич и дерево, объём собран "
+     "из сдвинутых прямоугольников.",
+     [("Этажность", "Два уровня с учётом перепада"),
+      ("Кровля", "Плоская"),
+      ("Фасад", "Белая штукатурка с тёмными вставками"),
+      ("Гараж", "Встроенный, в нижнем уровне"),
+      ("Терраса", "На уровне жилого этажа, ограждение со стойками"),
+      ("Посадка", "Рассчитан на участок с уклоном")]),
+]
+gal = {k: {"title": code + ". " + sub, "imgs": im} for k, code, sub, im, _t, _s in TR}
 p = head("Проекты загородных домов | Траектория",
-         "Проекты загородных домов «Траектория». Строительство домов с нуля в Санкт-Петербурге и Ленинградской области.",
-         "villageprojects.html", og=VILLAGE[0])
+         "Проекты загородных домов «Траектория»: одноэтажные и двухэтажные решения. Строительство в Санкт-Петербурге и Ленинградской области.",
+         "villageprojects.html", og=TR[0][3][0])
 p += page_header("Загородное строительство", ["Проекты", "загородных домов"],
-                 "Типовые решения «ТР». Адаптируем каждое под участок, состав семьи и бюджет.",
-                 bg=VILLAGE[4], crumbs="Проекты домов")
+                 "Четыре решения, которые мы адаптируем под участок, состав семьи и бюджет. "
+                 "На изображениях архитектурные визуализации.",
+                 bg=TR[2][3][0], crumbs="Проекты домов")
 p += '  <section class="section">\n    <div class="wrap grid">\n      <span class="label">Серии</span>\n      <div>\n'
-p += cards([(k, n, f"{len(im)} фото", im[0]) for k, n, im in TR])
+p += projects_long(TR)
 p += "\n      </div>\n    </div>\n  </section>\n"
 p += contacts_block()
-p += nxt("villagerealization.html", "Дальше", "Реализация")
+p += nxt("villagerealization.html", "Дальше", "Как это выглядит")
 p += tail(galleries=gal)
 write("villageprojects.html", p)
 
 # ════════════════════════ ЗАГОРОДНОЕ: РЕАЛИЗАЦИЯ ════════════════════════
-REAL = [("real%d" % (i + 1), "Объект %02d" % (i + 1), VILLAGE[i * 5:(i + 1) * 5]) for i in range(5)]
+REAL = [(k, code + ". " + sub, im) for k, code, sub, im, _t, _s in TR]
 gal = {k: {"title": n, "imgs": im} for k, n, im in REAL}
-p = head("Реализация загородного строительства | Траектория",
-         "Построенные загородные дома «Траектория» в Санкт-Петербурге и Ленинградской области.",
+p = head("Загородные дома в объёме | Траектория",
+         "Архитектурные визуализации проектов загородных домов «Траектория».",
          "villagerealization.html", og=VILLAGE[9])
-p += page_header("Загородное строительство", ["Реализация"],
-                 "Дома, построенные с нуля: от проекта и фундамента до чистовой отделки и благоустройства.",
+p += page_header("Загородное строительство", ["Как это", "выглядит"],
+                 "Как выглядят наши решения в объёме. Ниже архитектурные визуализации проектов; фотографии построенных объектов готовим отдельно.",
                  bg=VILLAGE[9], crumbs="Реализация")
 p += '  <section class="section">\n    <div class="wrap grid">\n      <span class="label">Объекты</span>\n      <div>\n'
 p += cards([(k, n, f"{len(im)} фото", im[0]) for k, n, im in REAL])
@@ -741,31 +1002,42 @@ p += tail(galleries={"about_gal": {"title": "Объекты Траектории
 write("about.html", p)
 
 # ════════════════════════ ПАРТНЁРЫ ════════════════════════
-SETL = ("«Траектория» гордится надежными партнерскими отношениями с SetlGroup, ведущим застройщиком "
-        "в регионе. Это сотрудничество подтверждает нашу способность выполнять проекты на высшем уровне "
-        "и обеспечивать высокое качество внутренней отделки для жилых комплексов SetlGroup. Мы совместно "
-        "стремимся создать комфортные и стильные пространства для ваших будущих домов.")
 PARTNERS = [
-    ("SetlGroup", "Застройщик", SETL, None),
-    ("КРЕПС", "Производитель сухих строительных смесей", None,
-     None),
-    ("ТД «Стройтраст»", "Поставщик строительных материалов", None, None),
-    ("ТД «Петрович»", "Строительный торговый дом", None, None),
+    ("setl", "SetlGroup", "Застройщик", "#e5352b", "#8f1410",
+     "Петербургский холдинг полного цикла: от проектирования и стройки до продаж и управления. "
+     "Работает с 1994 года, построил больше 14 миллионов квадратных метров, первое место в городе "
+     "по объёму текущего строительства. Мы делаем внутреннюю отделку и входные группы в его жилых "
+     "комплексах: «Чистое небо», Univer City, Svetlana Park, «Панорама парк Сосновка»."),
+    ("kreps", "КРЕПС", "Сухие строительные смеси", "#ff8a1f", "#c74a00",
+     "Петербургский производитель с 1998 года: штукатурки, шпаклёвки, плиточные клеи, ровнители, "
+     "фасадные системы утепления. Два завода — в Петербурге и Арамиле, больше пятидесяти позиций "
+     "в линейке. С 2021 года входит в швейцарский концерн Sika. На этих составах мы штукатурим "
+     "и выравниваем: от чернового основания до финишного слоя под окраску."),
+    ("stroytrast", "ТД «Стройтраст»", "Поставка материалов", "#ffc61a", "#e08b00",
+     "Оптовый поставщик отделочных материалов и комплектовщик объектов в Петербурге. "
+     "Ключевая специализация — стекломагниевые листы: несгораемое основание под отделку, "
+     "которое мы применяем в местах общего пользования и во влажных помещениях. "
+     "Через них же идут огнестойкие стеновые панели и сопутствующая отделка."),
+    ("petrovich", "ТД «Петрович»", "Строительный торговый дом", "#f3403a", "#ffc400",
+     "Крупнейшая в Северо-Западе сеть строительных материалов, работает с 1995 года. "
+     "Около двадцати торговых центров, доставка в сотни городов, отдельное направление "
+     "комплектации строек. Для нас это оперативная логистика: материалы приходят на объект "
+     "в срок и партиями под конкретный этап работ, без складских простоев."),
 ]
 p = head("Партнёры | Траектория",
          "Партнёры компании «Траектория»: SetlGroup, КРЕПС, ТД «Стройтраст», ТД «Петрович».",
          "partners.html", og=VILLAGE[2])
 p += page_header("Компания", ["Наши партнёры"],
-                 "С кем мы работаем на объектах и у кого закупаем материалы.",
+                 "Застройщики, на чьих объектах мы работаем, и поставщики, у которых закупаем материалы.",
                  crumbs="Партнёры")
 p += '  <section class="section">\n    <div class="wrap grid">\n      <span class="label">Партнёрство</span>\n      <div class="partners">\n'
-for i, (name, role, txt, todo) in enumerate(PARTNERS):
-    body = f'        <p class="partner__txt">{txt}</p>\n' if txt else ""
-    note = f'        <p class="partner__todo">{todo}</p>\n' if todo else ""
-    p += f"""      <article class="partner rv" style="--dl:{min(i,4)*70}ms">
+for i, (slug, name, role, c1, c2, txt) in enumerate(PARTNERS):
+    p += f"""      <article class="partner rv" style="--dl:{min(i,4)*70}ms;--p1:{c1};--p2:{c2}">
+        <span class="partner__logo"><img class="partner__mark" data-logo="assets/img/partners/{slug}.svg" alt="" width="180" height="56"></span>
         <span class="label label--brand">{role}</span>
         <h2 class="partner__name">{name}</h2>
-{body}{note}      </article>
+        <p class="partner__txt">{txt}</p>
+      </article>
 """
 p += "      </div>\n    </div>\n  </section>\n"
 p += contacts_block()
@@ -800,6 +1072,98 @@ p += tail()
 write("contacts.html", p)
 
 print("years:", YEARS)
+
+
+# Страница заявки
+p = head("Заявка на проект | Траектория",
+         "Оставьте заявку на строительство дома или отделку: перезвоним, уточним задачу и посчитаем смету.",
+         "zayavka.html")
+p += page_header("Заявка", ["Обсудим", "ваш проект"],
+                 "Заполните форму, и мы свяжемся с вами, чтобы уточнить задачу по участку, "
+                 "срокам и бюджету. Если удобнее голосом, звоните: {TEL}.".format(TEL=TEL),
+                 crumbs="Заявка")
+p += """
+  <section class="section">
+    <div class="wrap grid">
+      <span class="label">Форма</span>
+      <div>
+        <form class="form" id="zform" data-form novalidate>
+          <div class="two">
+            <div class="field">
+              <label for="f-name">Как к вам обращаться</label>
+              <input id="f-name" name="name" type="text" autocomplete="name" placeholder="Имя">
+            </div>
+            <div class="field">
+              <label for="f-tel">Телефон</label>
+              <input id="f-tel" name="tel" type="tel" autocomplete="tel" required placeholder="+7">
+            </div>
+          </div>
+
+          <div class="two">
+            <div class="field">
+              <label for="f-mail">Почта</label>
+              <input id="f-mail" name="mail" type="email" autocomplete="email" placeholder="necessary@mail.ru">
+            </div>
+            <div class="field">
+              <label for="f-kind">Направление</label>
+              <select id="f-kind" name="kind">
+                <option>Строительство загородного дома</option>
+                <option>Отделка квартиры в новостройке</option>
+                <option>Входные группы в жилом комплексе</option>
+                <option>Внутренняя отделка дома</option>
+                <option>Пока не определился</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="f-proj">Интересующий проект</label>
+            <input id="f-proj" name="proj" type="text" placeholder="Например, ТР 01">
+          </div>
+
+          <div class="field">
+            <label for="f-msg">Что хотите построить</label>
+            <textarea id="f-msg" name="msg" placeholder="Участок, площадь, сроки, бюджет: всё, что уже понятно"></textarea>
+          </div>
+
+          <label class="agree">
+            <input id="f-ok" name="ok" type="checkbox" required>
+            <span>Согласен на обработку персональных данных в соответствии с
+              <a href="#" id="f-policy" data-policy>политикой обработки</a>. Данные нужны только для того,
+              чтобы связаться с вами по этой заявке.</span>
+          </label>
+
+          <button class="cta cta--solid form__send magnet" type="submit">Отправить заявку</button>
+          <p class="form__note" id="f-note" data-note>Отвечаем в рабочее время. Если заявка срочная, быстрее позвонить.</p>
+        </form>
+
+        <div class="done" id="zdone" data-done role="status">
+          <span class="tick" aria-hidden="true">
+            <svg viewBox="0 0 52 52"><circle class="tick__o" cx="26" cy="26" r="23"/><path class="tick__c" d="M15 27l8 8 15-16"/></svg>
+          </span>
+          <h2>Заявка отправлена</h2>
+          <p>Мы получили ваше сообщение и свяжемся с вами. Если нужно быстрее, звоните: <a class="mono" href="{TELH}">{TEL}</a>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+""".replace("{TELH}", TELH).replace("{TEL}", TEL)
+p += """
+  <section class="section section--tight" style="border-top:1px solid var(--rule-soft)">
+    <div class="wrap grid">
+      <span class="label">Что дальше</span>
+      <div class="facts">
+        <div class="fact rv"><span class="label">Шаг 1</span><span class="fact__v">Созвонимся и уточним задачу: участок, состав семьи, сроки</span></div>
+        <div class="fact rv"><span class="label">Шаг 2</span><span class="fact__v">Подберём решение из готовых серий или возьмём ваш проект</span></div>
+        <div class="fact rv"><span class="label">Шаг 3</span><span class="fact__v">Посчитаем смету и согласуем состав работ</span></div>
+      </div>
+    </div>
+  </section>
+"""
+p += contacts_block()
+p += nxt("villageprojects.html", "Дальше", "Проекты загородных домов")
+p += tail()
+write("zayavka.html", p)
 
 
 # Манифест изображений.

@@ -5,7 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>О компании | Траектория</title>
 <meta name="description" content="«Траектория»: строительная компания, основанная в 2013 году. Реализует проекты в Санкт-Петербурге и Ленинградской области.">
-<meta name="theme-color" content="#0e1216">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#ffffff">
+<script>(function(){var t;try{t=localStorage.getItem('tr-theme');}catch(e){}document.documentElement.setAttribute('data-theme',t==='dark'?'dark':'light');if(t==='dark'){var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content','#0e1216');}})();</script>
 <link rel="icon" href="assets/img/brand/logo-dark.svg">
 <meta property="og:type" content="website">
 <meta property="og:title" content="О компании | Траектория">
@@ -43,12 +45,13 @@
 
 <header class="hdr" id="hdr">
   <div class="hdr__in">
-    <a class="hdr__logo" href="index.html" aria-label="Траектория, на главную">
-      <img src="assets/img/brand/logo-dark.svg" alt="Траектория" width="160" height="38">
-    </a>
+    <a class="mark hdr__mark" href="index.html" aria-label="Траектория, на главную">Траектория</a>
     <nav class="hdr__nav" aria-label="Основное">
       <a class="hdr__tel mono" href="tel:+79119230903">+7 911 923-09-03</a>
       <a class="cta magnet" href="zayavka.html">Обсудить проект</a>
+      <button class="tgl" id="theme" type="button" aria-label="Включить тёмную тему" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.4"/><path d="M12 3.6a8.4 8.4 0 0 0 0 16.8z"/></svg>
+      </button>
       <button class="burger" id="burger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="sheet">
         <i></i><i></i>
       </button>
@@ -194,9 +197,7 @@
 <footer class="ftr">
   <div class="wrap">
     <div class="ftr__top">
-      <a class="ftr__logo" href="index.html" aria-label="Траектория, на главную">
-        <img src="assets/img/brand/logo-light.svg" alt="Траектория" width="180" height="54" loading="lazy">
-      </a>
+      <a class="mark ftr__mark-a" href="index.html" aria-label="Траектория, на главную">Траектория</a>
       <div class="ftr__cols">
         <div class="ftr__col">
           <span class="label">Загородное</span>
@@ -230,6 +231,64 @@
   <div class="dock__in">
     <a class="cta cta--solid" href="tel:+79119230903">Позвонить</a>
     <a class="cta" href="zayavka.html">Заявка</a>
+  </div>
+</div>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
+  <div class="modal__veil" data-modal-close></div>
+  <div class="modal__box" role="document">
+    <button class="modal__x" type="button" data-modal-close aria-label="Закрыть">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg>
+    </button>
+    <div class="modal__in">
+      <span class="label label--brand" id="modalKicker">Заявка</span>
+      <h2 class="modal__t" id="modalTitle">Обсудим ваш проект</h2>
+      <p class="modal__lead" id="modalLead">Оставьте телефон, перезвоним и уточним задачу. Это ни к чему не обязывает.</p>
+
+      <form class="form form--tight" data-form novalidate>
+        <div class="two">
+          <div class="field">
+            <label>Как к вам обращаться</label>
+            <input name="name" type="text" autocomplete="name" placeholder="Имя">
+          </div>
+          <div class="field">
+            <label>Телефон</label>
+            <input name="tel" type="tel" autocomplete="tel" required placeholder="+7">
+          </div>
+        </div>
+        <div class="field">
+          <label>Направление</label>
+          <select name="kind">
+            <option>Строительство загородного дома</option>
+            <option>Отделка квартиры в новостройке</option>
+            <option>Входные группы в жилом комплексе</option>
+            <option>Внутренняя отделка дома</option>
+            <option>Пока не определился</option>
+          </select>
+        </div>
+        <input name="proj" type="hidden" value="">
+        <div class="field">
+          <label>Коротко о задаче</label>
+          <textarea name="msg" rows="3" placeholder="Участок, площадь, сроки, бюджет: всё, что уже понятно"></textarea>
+        </div>
+        <label class="agree">
+          <input name="ok" type="checkbox" required>
+          <span>Согласен на обработку персональных данных в соответствии с
+            <a href="#" data-policy>политикой обработки</a>.</span>
+        </label>
+        <button class="cta cta--solid form__send magnet" type="submit">Отправить заявку</button>
+        <p class="form__note" data-note>Перезваниваем в рабочее время. Если срочно, быстрее позвонить: <a class="mono" href="tel:+79119230903">+7 911 923-09-03</a>.</p>
+      </form>
+
+      <div class="thanks" data-done role="status">
+        <span class="tick" aria-hidden="true">
+          <svg viewBox="0 0 52 52"><circle class="tick__o" cx="26" cy="26" r="23"/><path class="tick__c" d="M15 27l8 8 15-16"/></svg>
+        </span>
+        <h3>Спасибо, заявка у нас</h3>
+        <p>Перезвоним на указанный номер. Если нужно быстрее — <a class="mono" href="tel:+79119230903">+7 911 923-09-03</a>.</p>
+        <button class="cta magnet" type="button" data-modal-close>Закрыть</button>
+      </div>
+    </div>
   </div>
 </div>
 
